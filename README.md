@@ -15,5 +15,5 @@ https://docs.google.com/document/d/1P8Maf2JmJP85va3HU6ZJVzDAMtFawccRpDgRTvuONxE/
 ## Integrantes 
 
 - Cesaro Daniel
-- Buitron Gonzalez Martin
+- González Buitrón Martín - martingonzalezbuitron@gmail.com
 - Martinez Eduardo
