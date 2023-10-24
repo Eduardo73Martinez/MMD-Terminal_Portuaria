@@ -16,4 +16,4 @@ Link a la documentación [acá](https://docs.google.com/document/d/1P8Maf2JmJP85
 
 - Cesaro Daniel
 - González Buitrón Martín - martingonzalezbuitron@gmail.com
-- Martinez Eduardo
+- Martinez Eduardo        - mm7735608@gmail.com
