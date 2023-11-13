@@ -1,12 +1,10 @@
 package model;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
-public class FechaLlegada {
+public class FechaLlegada extends SimpleQuery {
 
-	private List<Viaje> 	viajes = new ArrayList<Viaje>();
 	private LocalDate		fecha;
 
 	public FechaLlegada(LocalDate fecha, List<Viaje> viajes) {
@@ -15,6 +13,7 @@ public class FechaLlegada {
 		this.viajes = viajes;
 	}
 
+	@Override
 	public List<Viaje> filtrar() {
 		// TODO Auto-generated method stub
 		return viajes.stream().filter(v -> v.getFechaDeSalida().equals(this.fecha)).toList();
