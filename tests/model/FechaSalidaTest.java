@@ -11,9 +11,9 @@ import java.util.Arrays;
 import java.util.List;
 
 
-public class FechaLlegadaTest {
+public class FechaSalidaTest {
 
-	private FechaLlegada	fechaLlegada;
+	private FechaSalida	fechaSalida;
 	private List<Viaje> 	viajes = new ArrayList<Viaje>();
 	private LocalDate		fecha;
 
@@ -37,22 +37,22 @@ public class FechaLlegadaTest {
 		this.viajes.add(viaje1);
 		this.viajes.add(viaje2);
 		this.viajes.add(viaje3);
-		when(this.viaje1.getFechaDeLlegada()).thenReturn(fecha);
-		when(this.viaje2.getFechaDeLlegada()).thenReturn(fecha1);
-		when(this.viaje3.getFechaDeLlegada()).thenReturn(fecha2);
+		when(this.viaje1.getFechaDeSalida()).thenReturn(fecha);
+		when(this.viaje2.getFechaDeSalida()).thenReturn(fecha1);
+		when(this.viaje3.getFechaDeSalida()).thenReturn(fecha2);
 
 		// SUT (System Under Test): objeto a testear
-		this.fechaLlegada = new FechaLlegada(fecha, this.viajes);
+		this.fechaSalida = new FechaSalida(fecha, this.viajes);
 	}
 
 	@Test
 	void testConstructor() {
-		assertNotNull(this.fechaLlegada);
+		assertNotNull(this.fechaSalida);
 	}
 
 	@Test
 	public void testFiltrar() {
 		List<Viaje> viajesEsperados = Arrays.asList(viaje1);
-		assertEquals(viajesEsperados, this.fechaLlegada.filtrar());
+		assertEquals(viajesEsperados, this.fechaSalida.filtrar());
 	}
 }
