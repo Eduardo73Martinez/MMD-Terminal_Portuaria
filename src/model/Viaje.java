@@ -22,4 +22,9 @@ public class Viaje {
 		return null;
 	}
 
+	public Object getTerminalOrigen() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
