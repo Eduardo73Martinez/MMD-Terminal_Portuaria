@@ -17,4 +17,9 @@ public class Viaje {
 		return this.fechaDeLlegada;
 	}
 
+	public Object getTerminalDestino() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
