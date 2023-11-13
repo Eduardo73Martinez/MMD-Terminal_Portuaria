@@ -37,9 +37,9 @@ public class FechaLlegadaTest {
 		this.viajes.add(viaje1);
 		this.viajes.add(viaje2);
 		this.viajes.add(viaje3);
-		when(this.viaje1.getFechaDeSalida()).thenReturn(fecha);
-		when(this.viaje2.getFechaDeSalida()).thenReturn(fecha1);
-		when(this.viaje3.getFechaDeSalida()).thenReturn(fecha2);
+		when(this.viaje1.getFechaDeLlegada()).thenReturn(fecha);
+		when(this.viaje2.getFechaDeLlegada()).thenReturn(fecha1);
+		when(this.viaje3.getFechaDeLlegada()).thenReturn(fecha2);
 
 		// SUT (System Under Test): objeto a testear
 		this.fechaLlegada = new FechaLlegada(fecha, this.viajes);

@@ -16,7 +16,7 @@ public class FechaLlegada extends SimpleQuery {
 	@Override
 	public List<Viaje> filtrar() {
 		// TODO Auto-generated method stub
-		return viajes.stream().filter(v -> v.getFechaDeSalida().equals(this.fecha)).toList();
+		return viajes.stream().filter(v -> v.getFechaDeLlegada().equals(this.fecha)).toList();
 	}
 
 }
