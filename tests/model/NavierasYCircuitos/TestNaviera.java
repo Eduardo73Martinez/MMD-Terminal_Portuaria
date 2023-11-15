@@ -13,6 +13,7 @@ import org.junit.jupiter.api.Test;
 
 import model.Terminal;
 import model.Viaje;
+import model.NavierasYCircuitos.Naviera;
 
 /**
  * @author Martinez Eduardo
