@@ -125,7 +125,7 @@ class TestNaviera {
 
 	@Test
 	void testQuitarViaje() {
-		naviera.quietarViaje(viaje2);
+		naviera.quitarViaje(viaje2);
 		assertEquals(naviera.getViajes().size(), 1);
 	}
 
@@ -141,18 +141,18 @@ class TestNaviera {
 	// getters
 	@Test
 	void testgetBuques() {
-		int cantidadBuques = naviera.getBuques();
+		int cantidadBuques = naviera.getBuques().size();
 		assertEquals(cantidadBuques, 2);
 	}
 	
 	@Test
 	void testGetViajes() {
-		int cantidadDeViajes = naviera.getViajes();
+		int cantidadDeViajes = naviera.getViajes().size();
 		assertEquals(cantidadDeViajes, 2);
 	}
 	@Test
 	void testGetCircuitos() {
-		int cantidadDeCircuitos = naviera.getCircuitos();
+		int cantidadDeCircuitos = naviera.getCircuitos().size();
 		assertEquals(cantidadDeCircuitos, 2);
 	}
 
