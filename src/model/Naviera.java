@@ -1,10 +1,7 @@
-package model.NavierasYCircuitos;
+package model;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import model.Terminal;
-import model.Viaje;
 
 public class Naviera {
 	private ArrayList<CircuitoMartimo> circuitos;

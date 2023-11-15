@@ -1,12 +1,13 @@
 /**
  * 
  */
-package model.NavierasYCircuitos;
+package model;
 
 /**
- * @author marti
+ * @author martinez Eduardo 
  *
  */
 public class CircuitoMartimo {
+	
 
 }
