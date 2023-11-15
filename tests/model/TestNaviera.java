@@ -1,7 +1,7 @@
 /**
  * 
  */
-package model.NavierasYCircuitos;
+package model;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
@@ -11,9 +11,10 @@ import java.util.ArrayList;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import model.CircuitoMartimo;
+import model.Naviera;
 import model.Terminal;
 import model.Viaje;
-import model.NavierasYCircuitos.Naviera;
 
 /**
  * @author Martinez Eduardo

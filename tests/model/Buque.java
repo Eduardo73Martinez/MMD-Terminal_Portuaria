@@ -1,4 +1,4 @@
-package model.NavierasYCircuitos;
+package model;
 /**
  * @author martinez Eduardo  
  * esta interface fue creada con el fin de rellenar parametros en los test ya 
