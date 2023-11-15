@@ -1,7 +1,7 @@
 /**
  * 
  */
-package model.Navieras;
+package model.NavierasYCircuitos;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import model.Terminal;
 import model.Viaje;
 
 /**
@@ -44,6 +45,9 @@ class TestNaviera {
 	private CircuitoMartimo circuito3;
 	
 	
+	//terminal 
+	private Terminal terminal;
+	
 	
 	@BeforeEach
 	void setUp() throws Exception {
@@ -73,6 +77,10 @@ class TestNaviera {
 		//agrego al array
 		circuitos.add(circuito1);
 		circuitos.add(circuito2);
+		
+		
+		//creo un clase mock para terminal 
+		terminal = mock(Terminal.class);
 		
 		//instancio naviera con los array generados
 		naviera = new Naviera (circuitos, viajes, buques);
@@ -122,6 +130,10 @@ class TestNaviera {
 
 	@Test
 	void testCronogramaDeViajes() {
+		viajes.add(viaje3);
+		when(terminal.cronogramaSalidaViajes()).thenReturn(viajes);
+		naviera.cronograma(terminal);
+		verify(terminal).cronogramaSalidaViajes();
 	}
 	
 	
