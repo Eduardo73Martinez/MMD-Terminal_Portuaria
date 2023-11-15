@@ -5,6 +5,8 @@ package model;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 
@@ -16,10 +18,7 @@ import org.junit.jupiter.api.Test;
  *
  */
 class CircuitoMartimoTest {
-
-	/**
-	 * @throws java.lang.Exception
-	 */
+	
 	private CircuitoMartimo circuito;
 	private Tramo tramoNavegacion1;
 	private Tramo tramoNavegacion2;
@@ -58,7 +57,7 @@ class CircuitoMartimoTest {
 
 	@Test
 	void circuitoMartimoTest() {
-		assertEquals(circuito.getClass(), CircuitoMartimoTest.class);
+		assertEquals(circuito.getClass(), CircuitoMartimo.class);
 	}
 	@Test
 	void agregarTramoALaListaDeTramosDelCircuito() {
@@ -86,6 +85,18 @@ class CircuitoMartimoTest {
 		verify(tramoNavegacion4).getOrigen();
 		verify(tramoNavegacion4).getDestino();
 	}
-	
+	@Test
+	void getTiempoTotalDelRecorrido() {
+		when(tramoNavegacion1.getTiempo()).thenReturn(300);
+		when(tramoNavegacion2.getTiempo()).thenReturn(500);
+		when(tramoNavegacion3.getTiempo()).thenReturn(10);
+		
+		circuito.tiempoTotalDelCircuito();
+		
+		verify(tramoNavegacion1).getTiempo();
+		verify(tramoNavegacion2).getTiempo();
+		verify(tramoNavegacion3).getTiempo();
+		
+	}
 
 }
