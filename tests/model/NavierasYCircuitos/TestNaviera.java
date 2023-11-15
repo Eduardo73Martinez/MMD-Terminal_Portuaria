@@ -17,6 +17,10 @@ import model.NavierasYCircuitos.Naviera;
 
 /**
  * @author Martinez Eduardo
+ * 
+ * Observacion: este test fue creado usando TDD las clases en las cuales se implementa 
+ * mockito son clases que aun no fueron implementadas, no asi otras como por ejemplo viaje 
+ * que ya fue creada por otro colega.
  *
  */
 class TestNaviera {
