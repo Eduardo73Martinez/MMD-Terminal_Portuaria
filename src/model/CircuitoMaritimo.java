@@ -13,7 +13,7 @@ import java.util.ArrayList;
  * @author Martinez Eduardo
  *
  */
-public class CircuitoMartimo {
+public class CircuitoMaritimo {
 	private ArrayList<Tramo> tramos;
 
 	/**
@@ -42,7 +42,7 @@ public class CircuitoMartimo {
 		this.tramos.add(tramoSiguiente);
 	} 
 
-	public CircuitoMartimo(ArrayList<Tramo> tramos) {
+	public CircuitoMaritimo(ArrayList<Tramo> tramos) {
 		super();
 		this.tramos = tramos;
 	}

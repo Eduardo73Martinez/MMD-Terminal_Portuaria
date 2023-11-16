@@ -19,9 +19,9 @@ import org.mockito.internal.stubbing.answers.ThrowsException;
  * @author Martinez Eduardo
  *
  */
-class CircuitoMartimoTest {
+class CircuitoMaritimoTest {
 	
-	private CircuitoMartimo circuito;
+	private CircuitoMaritimo circuito;
 	private Tramo tramoNavegacion1;
 	private Tramo tramoNavegacion2;
 	private Tramo tramoNavegacion3;
@@ -54,12 +54,12 @@ class CircuitoMartimoTest {
 		teminalDestino1 = mock(Terminal.class);
 		teminalDestino2 = mock(Terminal.class);
 		
-		circuito = new CircuitoMartimo(tramosDeCircuito);
+		circuito = new CircuitoMaritimo(tramosDeCircuito);
 	}
 
 	@Test
 	void circuitoMartimoTest() {
-		assertEquals(circuito.getClass(), CircuitoMartimo.class);
+		assertEquals(circuito.getClass(), CircuitoMaritimo.class);
 	}
 	@Test
 	void agregarTramoALaListaDeTramosDelCircuito() {

@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import model.CircuitoMartimo;
+import model.CircuitoMaritimo;
 import model.Naviera;
 import model.Terminal;
 import model.Viaje;
@@ -32,7 +32,7 @@ class TestNaviera {
 	
 	private ArrayList<Viaje> viajes = new ArrayList<>();
 	private ArrayList<Buque> buques = new ArrayList<>();
-	private ArrayList<CircuitoMartimo> circuitos = new ArrayList<>();
+	private ArrayList<CircuitoMaritimo> circuitos = new ArrayList<>();
 	
 	// agregamos las clases para usarlas en las colecciones
 	//viajes
@@ -46,9 +46,9 @@ class TestNaviera {
 	private Buque buque3;
 	
 	//circuitos
-	private CircuitoMartimo circuito1;
-	private CircuitoMartimo circuito2;
-	private CircuitoMartimo circuito3;
+	private CircuitoMaritimo circuito1;
+	private CircuitoMaritimo circuito2;
+	private CircuitoMaritimo circuito3;
 	
 	
 	//terminal 
@@ -76,9 +76,9 @@ class TestNaviera {
 		buques.add(buque2);
 		
 		// instancio una clase que implemento yo
-		circuito1 = new CircuitoMartimo(null);
-		circuito2 = new CircuitoMartimo(null);
-		circuito3 = new CircuitoMartimo(null);
+		circuito1 = new CircuitoMaritimo(null);
+		circuito2 = new CircuitoMaritimo(null);
+		circuito3 = new CircuitoMaritimo(null);
 		
 		//agrego al array
 		circuitos.add(circuito1);

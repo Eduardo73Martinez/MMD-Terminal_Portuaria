@@ -4,24 +4,24 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Naviera {
-	private ArrayList<CircuitoMartimo> circuitos;
+	private ArrayList<CircuitoMaritimo> circuitos;
 	private ArrayList<Viaje> viajes;
 	private ArrayList<Buque> buques;
 
-	public Naviera(ArrayList<CircuitoMartimo> circuitos, ArrayList<Viaje> viajes, ArrayList<Buque> buques) {
+	public Naviera(ArrayList<CircuitoMaritimo> circuitos, ArrayList<Viaje> viajes, ArrayList<Buque> buques) {
 		// TODO Auto-generated constructor stub
 		this.circuitos = circuitos;
 		this.viajes = viajes;
 		this.buques = buques;
 	}
 
-	public void agregarCircuito(CircuitoMartimo circuito) {
+	public void agregarCircuito(CircuitoMaritimo circuito) {
 		// TODO Auto-generated method stub
 		this.circuitos.add(circuito);
 		
 	}
 
-	public ArrayList<CircuitoMartimo> getCircuitos() {
+	public ArrayList<CircuitoMaritimo> getCircuitos() {
 		// TODO Auto-generated method stub
 		return this.circuitos;
 	}
@@ -37,7 +37,7 @@ public class Naviera {
 		return this.buques;
 	}
 
-	public void quitarCircuito(CircuitoMartimo circuito) {
+	public void quitarCircuito(CircuitoMaritimo circuito) {
 		// TODO Auto-generated method stub
 		this.circuitos.remove(circuito);
 	}
