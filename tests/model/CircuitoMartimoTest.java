@@ -52,7 +52,7 @@ class CircuitoMartimoTest {
 		teminalDestino1 = mock(Terminal.class);
 		teminalDestino2 = mock(Terminal.class);
 		
-		circuito = new CircuitoMartimo();
+		circuito = new CircuitoMartimo(tramosDeCircuito);
 	}
 
 	@Test
@@ -61,8 +61,22 @@ class CircuitoMartimoTest {
 	}
 	@Test
 	void agregarTramoALaListaDeTramosDelCircuito() {
-		circuito.agregarTramo(tramoNavegacion4);
-		assertEquals(circuito.getTramos().size(),4);
+		// tramo anterior 
+		when(tramoNavegacion1.getOrigen()).thenReturn(teminalOrigen1);
+		when(tramoNavegacion1.getDestino()).thenReturn(teminalDestino1);
+				
+		//tramo siguiente 
+		when(tramoNavegacion2.getOrigen()).thenReturn(teminalDestino1);
+		when(tramoNavegacion2.getDestino()).thenReturn(teminalOrigen1);
+				
+		// tramo a agregar
+		when(tramoNavegacion4.getOrigen()).thenReturn(teminalOrigen2);
+		when(tramoNavegacion4.getDestino()).thenReturn(teminalDestino2);
+				
+				
+		circuito.agregarTramoEntre( tramoNavegacion4,tramoNavegacion1 , tramoNavegacion2 ) ; 
+				
+		verify(tramoNavegacion4).getOrigen();
 	}
 	@Test
 	void quitarTramoALaListaDeTramosDelCircuito() {
@@ -76,20 +90,29 @@ class CircuitoMartimoTest {
 	}
 	@Test
 	void validarAgregarTramoALaListaDeTramosDelCircuito() {
+		// tramo anterior 
+		when(tramoNavegacion1.getOrigen()).thenReturn(teminalOrigen1);
+		when(tramoNavegacion1.getDestino()).thenReturn(teminalDestino1);
+		
+		//tramo siguiente 
+		when(tramoNavegacion2.getOrigen()).thenReturn(teminalDestino1);
+		when(tramoNavegacion2.getDestino()).thenReturn(teminalOrigen1);
+		
 		// tramo a agregar
 		when(tramoNavegacion4.getOrigen()).thenReturn(teminalOrigen2);
 		when(tramoNavegacion4.getDestino()).thenReturn(teminalDestino2);
 		
-		circuito.validarAgregarTramo(tramoNavegacion4); 
 		
-		verify(tramoNavegacion4).getOrigen();
-		verify(tramoNavegacion4).getDestino();
+		circuito.validarAgregarTramoEntre( tramoNavegacion4,tramoNavegacion1 , tramoNavegacion2 ) ; 
+		
+		verify(tramoNavegacion1).getDestino();
+		verify(tramoNavegacion2).getOrigen();
 	}
 	@Test
 	void getTiempoTotalDelRecorrido() {
-		when(tramoNavegacion1.getTiempo()).thenReturn(300);
-		when(tramoNavegacion2.getTiempo()).thenReturn(500);
-		when(tramoNavegacion3.getTiempo()).thenReturn(10);
+		when(tramoNavegacion1.getTiempo()).thenReturn(300.0);
+		when(tramoNavegacion2.getTiempo()).thenReturn(500.0);
+		when(tramoNavegacion3.getTiempo()).thenReturn(10.0);
 		
 		circuito.tiempoTotalDelCircuito();
 		

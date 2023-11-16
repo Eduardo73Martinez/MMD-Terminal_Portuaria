@@ -8,7 +8,7 @@ package model;
  *
  */
 public class Tramo {
-	private Terminal terminalOrigen;
+	private Terminal terminalOrigen; // esta es una terminal nueva
 	private Terminal TerminalDestino;
 	private Float precio;
 
@@ -22,9 +22,18 @@ public class Tramo {
 		return this.TerminalDestino;
 	}
 
-	public Object getTiempo() {
+	public double getTiempo() {
 		// TODO Auto-generated method stub
-		return null;
+		return 0;
+	}
+
+	public void setDestino(Terminal origen) {
+		// TODO Auto-generated method stub
+		
+	}
+	public void setOrigen(Terminal origen) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

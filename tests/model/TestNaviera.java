@@ -76,9 +76,9 @@ class TestNaviera {
 		buques.add(buque2);
 		
 		// instancio una clase que implemento yo
-		circuito1 = new CircuitoMartimo();
-		circuito2 = new CircuitoMartimo();
-		circuito3 = new CircuitoMartimo();
+		circuito1 = new CircuitoMartimo(null);
+		circuito2 = new CircuitoMartimo(null);
+		circuito3 = new CircuitoMartimo(null);
 		
 		//agrego al array
 		circuitos.add(circuito1);
