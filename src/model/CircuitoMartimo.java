@@ -74,4 +74,9 @@ public class CircuitoMartimo {
 
 	}
 
+	public double precioTotal() {
+		// TODO Auto-generated method stub
+		return this.tramos.stream().mapToDouble(s -> s.getPrecio()).sum();
+	}
+
 }
