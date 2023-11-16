@@ -105,7 +105,7 @@ class CircuitoMartimoTest {
 		when(tramoNavegacion4.getDestino()).thenReturn(teminalDestino2);
 		
 		
-		circuito.validarAgregarTramoEntre( tramoNavegacion4,tramoNavegacion1 , tramoNavegacion2 ) ; 
+		circuito.validarTramoEntre( tramoNavegacion4,tramoNavegacion1 , tramoNavegacion2 ) ; 
 		
 		verify(tramoNavegacion1).getDestino();
 		verify(tramoNavegacion2).getOrigen();
@@ -137,10 +137,24 @@ class CircuitoMartimoTest {
 		when(tramoNavegacion4.getOrigen()).thenReturn(teminalOrigen2);
 		when(tramoNavegacion4.getDestino()).thenReturn(teminalDestino2);
 				
-		assertThrows(Error.class, ()->{circuito.validarAgregarTramoEntre( tramoNavegacion4,tramoNavegacion1 , tramoNavegacion2 );}
+		assertThrows(Error.class, ()->{circuito.validarTramoEntre( tramoNavegacion4,tramoNavegacion1 , tramoNavegacion2 );}
 		);
 		
 		//assertEquals(error.getMessage(), "Los tramos dados no son correlativos");
+	}
+	@Test
+	void precioTotalDelCicuito()  {
+		// tramo anterior 
+		when(tramoNavegacion1.getPrecio()).thenReturn(300.0);
+		when(tramoNavegacion2.getPrecio()).thenReturn(400.0);
+		when(tramoNavegacion3.getPrecio()).thenReturn(1000.0);
+				
+		//
+		circuito.precioTotal();
+		
+		verify(tramoNavegacion1).getPrecio();
+		verify(tramoNavegacion2).getPrecio();
+		verify(tramoNavegacion3).getPrecio();
 	}
 
 }

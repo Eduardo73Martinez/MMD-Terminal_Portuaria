@@ -26,7 +26,7 @@ public class CircuitoMartimo {
 	 */
 	public void agregarTramoEntre(Tramo nuevoTramo, Tramo tramoAnterior, Tramo tramoSiguiente) {
 
-		this.validarAgregarTramoEntre(nuevoTramo, tramoAnterior, tramoSiguiente); // verifica los requerimentos.
+		this.validarTramoEntre(nuevoTramo, tramoAnterior, tramoSiguiente); // verifica los requerimentos.
 		// los sacamos del array para actualizarlos
 		this.quitarTramo(tramoAnterior);
 		this.quitarTramo(tramoSiguiente);
@@ -58,7 +58,7 @@ public class CircuitoMartimo {
 
 	}
 
-	public void validarAgregarTramoEntre(Tramo nuevoTramo, Tramo tramoAnterior, Tramo tramoSiguiente) {
+	public void validarTramoEntre(Tramo nuevoTramo, Tramo tramoAnterior, Tramo tramoSiguiente) {
 		// TODO Auto-generated method stub
 		if (!this.tramos.contains(tramoAnterior) && !this.tramos.contains(tramoSiguiente)) {
 			throw new Error("Alguno de los tramos dados no pertenece al circuito");
@@ -72,6 +72,11 @@ public class CircuitoMartimo {
 	public double tiempoTotalDelCircuito() {
 		return this.tramos.stream().mapToDouble(s -> s.getTiempo()).sum();
 
+	}
+
+	public double precioTotal() {
+		// TODO Auto-generated method stub
+		return this.tramos.stream().mapToDouble(s -> s.getPrecio()).sum();
 	}
 
 }
