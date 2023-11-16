@@ -10,7 +10,7 @@ package model;
 public class Tramo {
 	private Terminal terminalOrigen; // esta es una terminal nueva
 	private Terminal TerminalDestino;
-	private Float precio;
+	private double precio;
 
 	public Terminal getOrigen() {
 		// TODO Auto-generated method stub
@@ -25,6 +25,10 @@ public class Tramo {
 	public double getTiempo() {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	public double getPrecio() {
+		return precio;
 	}
 
 	public void setDestino(Terminal origen) {
