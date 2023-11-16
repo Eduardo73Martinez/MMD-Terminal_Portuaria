@@ -4,13 +4,22 @@
 package model;
 
 /**
- * @author marti
+ * @author Martinez Eduardo
  *
  */
 public class Tramo {
-	private Terminal terminalOrigen; // esta es una terminal nueva
-	private Terminal TerminalDestino;
+	private Terminal terminalOrigen; 
+	private Terminal terminalDestino;
 	private double precio;
+	private double tiempo; // el tiempo lo medelo como un double pueden ser meses, horas, dias,etc.
+
+	public Tramo(Terminal origen, Terminal destino, double precio, double tiempo) {
+		// TODO Auto-generated constructor stub
+		this.terminalOrigen = origen;
+		this.terminalDestino = destino;
+		this.precio = precio;
+		this.tiempo = tiempo; 
+	}
 
 	public Terminal getOrigen() {
 		// TODO Auto-generated method stub
@@ -19,25 +28,26 @@ public class Tramo {
 
 	public Terminal getDestino() {
 		// TODO Auto-generated method stub
-		return this.TerminalDestino;
+		return this.terminalDestino;
 	}
 
 	public double getTiempo() {
 		// TODO Auto-generated method stub
-		return 0;
+		return this.tiempo;
 	}
 
 	public double getPrecio() {
-		return precio;
+		return this.precio;
 	}
 
-	public void setDestino(Terminal origen) {
+	public void setDestino(Terminal destino) {
 		// TODO Auto-generated method stub
+		this.terminalDestino = destino;
 		
 	}
 	public void setOrigen(Terminal origen) {
 		// TODO Auto-generated method stub
-		
+		this.terminalOrigen = origen;
 	}
 
 }
