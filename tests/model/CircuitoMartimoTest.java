@@ -5,6 +5,7 @@ package model;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -12,6 +13,7 @@ import java.util.ArrayList;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.internal.stubbing.answers.ThrowsException;
 
 /**
  * @author Martinez Eduardo
@@ -120,6 +122,25 @@ class CircuitoMartimoTest {
 		verify(tramoNavegacion2).getTiempo();
 		verify(tramoNavegacion3).getTiempo();
 		
+	}
+	@Test
+	void excepcionAlAgregarUnTramo()  {
+		// tramo anterior 
+		when(tramoNavegacion1.getOrigen()).thenReturn(teminalOrigen1);
+		when(tramoNavegacion1.getDestino()).thenReturn(teminalDestino1);
+				
+		//tramo siguiente 
+		when(tramoNavegacion2.getOrigen()).thenReturn(teminalDestino1);
+		when(tramoNavegacion2.getDestino()).thenReturn(teminalOrigen1);
+				
+		// tramo a agregar
+		when(tramoNavegacion4.getOrigen()).thenReturn(teminalOrigen2);
+		when(tramoNavegacion4.getDestino()).thenReturn(teminalDestino2);
+				
+		assertThrows(Error.class, ()->{circuito.validarAgregarTramoEntre( tramoNavegacion4,tramoNavegacion1 , tramoNavegacion2 );}
+		);
+		
+		//assertEquals(error.getMessage(), "Los tramos dados no son correlativos");
 	}
 
 }
