@@ -170,5 +170,19 @@ class CircuitoMartimoTest {
 		verify(tramoNavegacion2).getPrecio();
 		verify(tramoNavegacion3).getPrecio();
 	}
+	@Test
+	void validacionDeExistenciaDeTerminalesEnElCircuito()  {
+		// tramo anterior 
+		when(tramoNavegacion1.getOrigen()).thenReturn(teminalOrigen2);
+		when(tramoNavegacion2.getOrigen()).thenReturn(teminalOrigen2);
+		when(tramoNavegacion3.getOrigen()).thenReturn(teminalOrigen1);
+				
+		//
+		circuito.perteneceAlCircuito(teminalOrigen1);
+		
+		verify(tramoNavegacion1).getOrigen();
+		verify(tramoNavegacion2).getOrigen();
+		verify(tramoNavegacion3).getOrigen();
+	}
 
 }
