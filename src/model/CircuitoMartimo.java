@@ -8,9 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-
-
-
 /**
  * @author Martinez Eduardo
  *
@@ -42,7 +39,7 @@ public class CircuitoMaritimo {
 		this.tramos.add(tramoAnterior);
 		this.tramos.add(nuevoTramo);
 		this.tramos.add(tramoSiguiente);
-	} 
+	}
 
 	public CircuitoMaritimo(ArrayList<Tramo> tramos) {
 		super();
@@ -71,9 +68,19 @@ public class CircuitoMaritimo {
 
 	}
 
+	public void validarTerminalEnCircuito(Terminal terminalAValidar) {
+		if (!this.perteneceAlCircuito(terminalAValidar)) {
+			throw new Error("La terminal dada no pertenece al circuito");
+		}
+	}
+
+	public boolean perteneceAlCircuito(Terminal terminal) {
+		// TODO Auto-generated method stub
+		return this.tramos.stream().anyMatch(s -> s.getOrigen() == terminal);
+	}
+
 	public double tiempoTotalDelCircuito() {
 		return this.tramos.stream().mapToDouble(s -> s.getTiempo()).sum();
-
 	}
 
 	public double precioTotal() {
@@ -81,11 +88,15 @@ public class CircuitoMaritimo {
 		return this.tramos.stream().mapToDouble(s -> s.getPrecio()).sum();
 	}
 
-	public double precioTotalEntre(Terminal origen, Terminal destino) {
+	public double precioTotalEntre(Terminal teminalOrigen, Terminal teminalDestino) {
 		// TODO Auto-generated method stub
 		Optional<Tramo> tramoOrigen =  this.tramos.stream()
 				.filter(t -> t.getOrigen().equals(origen))
 				.findFirst();
+		// TODO Auto-generated method stub
+		this.validarTerminalEnCircuito(teminalOrigen);
+		this.validarTerminalEnCircuito(teminalDestino);
+		ArrayList<Tramo> tramosRecorridos;
 		// Tengo el tramo origen
 		// Recorro los siguientes tramos y acumulo precio
 		// Encuentro el tramo con el destino y corto
@@ -109,6 +120,6 @@ public class CircuitoMaritimo {
 		// Encuentro el tramo con el destino y corto
 		// Retorno el nro de terminales vistas acumuladas
 		return null;
-	}
+  }
 
 }
