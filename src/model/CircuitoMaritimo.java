@@ -90,7 +90,7 @@ public class CircuitoMaritimo {
 		// Recorro los siguientes tramos y acumulo precio
 		// Encuentro el tramo con el destino y corto
 		// Retorno el precio acumulado
-		return null;
+		return (Double) null;
 	}
 
 	public double tiempoTotalEntre(Terminal origen, Terminal destino) {
@@ -99,7 +99,7 @@ public class CircuitoMaritimo {
 		// Recorro los siguientes tramos y acumulo tiempo
 		// Encuentro el tramo con el destino y corto
 		// Retorno el tiempo acumulado
-		return null;
+		return (Double) null;
 	}
 
 	public Integer nroTerminalesTotalEntre(Terminal origen, Terminal destino) {
