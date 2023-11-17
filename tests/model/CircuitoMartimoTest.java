@@ -156,5 +156,19 @@ class CircuitoMartimoTest {
 		verify(tramoNavegacion2).getPrecio();
 		verify(tramoNavegacion3).getPrecio();
 	}
+	@Test
+	void precioTotalEntreTerminales()  {
+		// tramo anterior 
+		when(tramoNavegacion1.getPrecio()).thenReturn(300.0);
+		when(tramoNavegacion2.getPrecio()).thenReturn(400.0);
+		when(tramoNavegacion3.getPrecio()).thenReturn(1000.0);
+				
+		//
+		circuito.precioTotalEntre(teminalOrigen1, teminalDestino1);
+		
+		verify(tramoNavegacion1).getPrecio();
+		verify(tramoNavegacion2).getPrecio();
+		verify(tramoNavegacion3).getPrecio();
+	}
 
 }
