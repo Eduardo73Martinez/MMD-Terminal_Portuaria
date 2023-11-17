@@ -93,4 +93,13 @@ public class CircuitoMaritimo {
 		return null;
 	}
 
+	public double tiempoTotalEntre(Terminal origen, Terminal destino) {
+		// TODO Auto-generated method stub
+		// Tengo el tramo origen
+		// Recorro los siguientes tramos y acumulo tiempo
+		// Encuentro el tramo con el destino y corto
+		// Retorno el tiempo acumulado
+		return null;
+	}
+
 }
