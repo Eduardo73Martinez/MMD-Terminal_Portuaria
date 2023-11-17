@@ -24,7 +24,7 @@ import model.Viaje;
  * que ya fue creada por otro colega.
  *
  */
-class TestNaviera {
+class NavieraTest {
 
 	private Naviera naviera;
 	
