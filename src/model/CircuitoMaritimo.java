@@ -5,6 +5,8 @@ package model;
 
 import static org.mockito.ArgumentMatchers.same;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 
 
@@ -77,6 +79,18 @@ public class CircuitoMaritimo {
 	public double precioTotal() {
 		// TODO Auto-generated method stub
 		return this.tramos.stream().mapToDouble(s -> s.getPrecio()).sum();
+	}
+
+	public double precioTotalEntre(Terminal origen, Terminal destino) {
+		// TODO Auto-generated method stub
+		Optional<Tramo> tramoOrigen =  this.tramos.stream()
+				.filter(t -> t.getOrigen().equals(origen))
+				.findFirst();
+		// Tengo el tramo origen
+		// Recorro los siguientes tramos y acumulo precio
+		// Encuentro el tramo con el destino y corto
+		// Retorno el precio acumulado
+		return null;
 	}
 
 }
