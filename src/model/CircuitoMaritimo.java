@@ -91,7 +91,7 @@ public class CircuitoMaritimo {
 	public double precioTotalEntre(Terminal teminalOrigen, Terminal teminalDestino) {
 		// TODO Auto-generated method stub
 		Optional<Tramo> tramoOrigen =  this.tramos.stream()
-				.filter(t -> t.getOrigen().equals(origen))
+				.filter(t -> t.getOrigen().equals(teminalOrigen))
 				.findFirst();
 		// TODO Auto-generated method stub
 		this.validarTerminalEnCircuito(teminalOrigen);
