@@ -5,12 +5,14 @@ package model;
 
 import static org.mockito.ArgumentMatchers.same;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 /**
  * @author Martinez Eduardo
  *
  */
-public class CircuitoMartimo {
+public class CircuitoMaritimo {
 	private ArrayList<Tramo> tramos;
 
 	/**
@@ -39,7 +41,7 @@ public class CircuitoMartimo {
 		this.tramos.add(tramoSiguiente);
 	}
 
-	public CircuitoMartimo(ArrayList<Tramo> tramos) {
+	public CircuitoMaritimo(ArrayList<Tramo> tramos) {
 		super();
 		this.tramos = tramos;
 	}
@@ -66,24 +68,6 @@ public class CircuitoMartimo {
 
 	}
 
-	public double tiempoTotalDelCircuito() {
-		return this.tramos.stream().mapToDouble(s -> s.getTiempo()).sum();
-
-	}
-
-	public double precioTotal() {
-		// TODO Auto-generated method stub
-		return this.tramos.stream().mapToDouble(s -> s.getPrecio()).sum();
-	}
-
-	public double precioTotalEntre(Terminal teminalOrigen, Terminal teminalDestino) {
-		// TODO Auto-generated method stub
-		this.validarTerminalEnCircuito(teminalOrigen);
-		this.validarTerminalEnCircuito(teminalDestino);
-		ArrayList<Tramo> tramosRecorridos;
-		return 0;
-	}
-
 	public void validarTerminalEnCircuito(Terminal terminalAValidar) {
 		if (!this.perteneceAlCircuito(terminalAValidar)) {
 			throw new Error("La terminal dada no pertenece al circuito");
@@ -94,5 +78,48 @@ public class CircuitoMartimo {
 		// TODO Auto-generated method stub
 		return this.tramos.stream().anyMatch(s -> s.getOrigen() == terminal);
 	}
+
+	public double tiempoTotalDelCircuito() {
+		return this.tramos.stream().mapToDouble(s -> s.getTiempo()).sum();
+	}
+
+	public double precioTotal() {
+		// TODO Auto-generated method stub
+		return this.tramos.stream().mapToDouble(s -> s.getPrecio()).sum();
+	}
+
+	public double precioTotalEntre(Terminal teminalOrigen, Terminal teminalDestino) {
+		// TODO Auto-generated method stub
+		Optional<Tramo> tramoOrigen =  this.tramos.stream()
+				.filter(t -> t.getOrigen().equals(origen))
+				.findFirst();
+		// TODO Auto-generated method stub
+		this.validarTerminalEnCircuito(teminalOrigen);
+		this.validarTerminalEnCircuito(teminalDestino);
+		ArrayList<Tramo> tramosRecorridos;
+		// Tengo el tramo origen
+		// Recorro los siguientes tramos y acumulo precio
+		// Encuentro el tramo con el destino y corto
+		// Retorno el precio acumulado
+		return (Double) null;
+	}
+
+	public double tiempoTotalEntre(Terminal origen, Terminal destino) {
+		// TODO Auto-generated method stub
+		// Tengo el tramo origen
+		// Recorro los siguientes tramos y acumulo tiempo
+		// Encuentro el tramo con el destino y corto
+		// Retorno el tiempo acumulado
+		return (Double) null;
+	}
+
+	public Integer nroTerminalesTotalEntre(Terminal origen, Terminal destino) {
+		// TODO Auto-generated method stub
+		// Tengo el tramo origen
+		// Recorro los siguientes tramos y acumulo cantidad de terminales vistas
+		// Encuentro el tramo con el destino y corto
+		// Retorno el nro de terminales vistas acumuladas
+		return null;
+  }
 
 }
