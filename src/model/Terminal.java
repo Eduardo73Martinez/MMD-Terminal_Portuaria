@@ -8,4 +8,6 @@ public interface Terminal {
 	public Boolean hayBuqueCerca();
 
 	public void recibirPreavisoPor(Buque buque);
+
+	public Posicion getPosicion();
 }

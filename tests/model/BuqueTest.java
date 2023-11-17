@@ -21,7 +21,7 @@ public class BuqueTest {
 	
 	private List<Carga> 	cargas 	  = new ArrayList<Carga>();
 	private Posicion		posicion1 = new Posicion(2, 3);
-	private GPS				gps 	  = new GPS(1);
+	private GPS				gps;
 	private Viaje			viaje;
 
 	private Terminal		terminal;
@@ -36,6 +36,7 @@ public class BuqueTest {
 	public void setUp() {
 		// DOC (Depended-On-Component): nuestros doubles
 		this.terminal 	= spy(Terminal.class);
+		this.gps		= spy(new GPS(1));
 		this.carga1 	= mock(Carga.class);
 		this.carga2 	= mock(Carga.class);
 		this.carga3 	= mock(Carga.class);
@@ -43,7 +44,7 @@ public class BuqueTest {
 		this.cargas.add(carga1);
 		this.cargas.add(carga2);
 		this.cargas.add(carga3);
-//		when(this.carga1.getBuque()).thenReturn(terminal);
+		when(this.gps.getPosicion()).thenReturn(posicion1);
 
 		// SUT (System Under Test): objeto a testear
 		this.buque = new Buque(stateOutbound, gps, viaje);
@@ -63,6 +64,7 @@ public class BuqueTest {
 
 	@Test
 	public void testDistanciaA() {
+		when(this.terminal.getPosicion()).thenReturn(posicion2);
 		float distanciaEsperada = 2;
 		assertEquals(distanciaEsperada, this.buque.distanciaA(this.terminal));
 	}

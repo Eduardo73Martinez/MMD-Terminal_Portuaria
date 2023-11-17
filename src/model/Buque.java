@@ -36,7 +36,7 @@ public class Buque {
 
 	public float distancia(Posicion p1, Posicion p2) {
 		// Taken from: https://stackoverflow.com/questions/14431032/i-want-to-calculate-the-distance-between-two-points-in-java
-		return (float) Math.hypot( (p1.getLatitud()  - p2.getLatitud())
+		return (float) Math.hypot( (p1.getLatitud() - p2.getLatitud())
 						 , (p1.getLongitud() - p2.getLongitud()) );
 	}
 
