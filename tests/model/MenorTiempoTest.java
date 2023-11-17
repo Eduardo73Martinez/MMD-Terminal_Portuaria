@@ -13,7 +13,7 @@ import org.junit.jupiter.api.Test;
 
 public class MenorTiempoTest {
 
-	private MenorTiempo				menorPrecio;
+	private MenorTiempo				menorTiempo;
 	
 	private Terminal			origen;
 	private Terminal			destino;
@@ -50,16 +50,16 @@ public class MenorTiempoTest {
 		when(this.circuito3.tiempoTotalEntre(origen, destino)).thenReturn(tiempo2);
 
 		// SUT (System Under Test): objeto a testear
-		this.menorPrecio = new MenorTiempo();
+		this.menorTiempo = new MenorTiempo();
 	}
 
 	@Test
 	void testConstructor() {
-		assertNotNull(this.menorPrecio);
+		assertNotNull(this.menorTiempo);
 	}
 
 	@Test
 	public void testElMejor() {
-		assertEquals(circuito1, this.menorPrecio.elMejor(this.circuitos, this.origen, this.destino));
+		assertEquals(circuito1, this.menorTiempo.elMejor(this.circuitos, this.origen, this.destino));
 	}
 }
