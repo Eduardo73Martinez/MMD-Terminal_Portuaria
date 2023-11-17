@@ -6,9 +6,6 @@ package model;
 import static org.mockito.ArgumentMatchers.same;
 import java.util.ArrayList;
 
-
-
-
 /**
  * @author Martinez Eduardo
  *
@@ -40,7 +37,7 @@ public class CircuitoMartimo {
 		this.tramos.add(tramoAnterior);
 		this.tramos.add(nuevoTramo);
 		this.tramos.add(tramoSiguiente);
-	} 
+	}
 
 	public CircuitoMartimo(ArrayList<Tramo> tramos) {
 		super();
@@ -77,6 +74,25 @@ public class CircuitoMartimo {
 	public double precioTotal() {
 		// TODO Auto-generated method stub
 		return this.tramos.stream().mapToDouble(s -> s.getPrecio()).sum();
+	}
+
+	public double precioTotalEntre(Terminal teminalOrigen, Terminal teminalDestino) {
+		// TODO Auto-generated method stub
+		this.validarTerminalEnCircuito(teminalOrigen);
+		this.validarTerminalEnCircuito(teminalDestino);
+		ArrayList<Tramo> tramosRecorridos;
+		return 0;
+	}
+
+	public void validarTerminalEnCircuito(Terminal terminalAValidar) {
+		if (!this.perteneceAlCircuito(terminalAValidar)) {
+			throw new Error("La terminal dada no pertenece al circuito");
+		}
+	}
+
+	public boolean perteneceAlCircuito(Terminal terminal) {
+		// TODO Auto-generated method stub
+		return this.tramos.stream().anyMatch(s -> s.getOrigen() == terminal);
 	}
 
 }
