@@ -6,6 +6,7 @@ package model;
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -15,9 +16,9 @@ import org.junit.jupiter.api.Test;
 class ContainerTest {
 	private Reefer containerRefrigerado;
 
-	@BeforeAll
-	static void setUpBeforeClass() throws Exception {
-		containerRefrigerado = new containerRefrigerado(8, 30 ,2, 7, 900);
+	@BeforeEach
+	void setUp(){
+		containerRefrigerado = new Reefer(8, 30 ,2, 7, 900);
 	}
 
 	@Test
@@ -31,6 +32,10 @@ class ContainerTest {
 	@Test
 	void testGetLargo() {
 		assertEquals(containerRefrigerado.getLargo(), 30);
+	}
+	@Test
+	void testGetAlto() {
+		assertEquals(containerRefrigerado.getAlto(), 2);
 	}
 	@Test
 	void testGetPeso() {

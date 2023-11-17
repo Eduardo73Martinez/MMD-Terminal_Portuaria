@@ -1,9 +1,10 @@
 package model;
 
 public class Container implements Carga {
-	private double ancho;
-	private double largo;
-	private double alto;
+	protected double ancho;
+	protected double largo;
+	protected double alto;
+	protected double peso;
 
 	@Override
 	public double getAncho() {
@@ -26,7 +27,7 @@ public class Container implements Carga {
 	@Override
 	public double getPeso() {
 		// TODO Auto-generated method stub
-		return this.getPeso();
+		return this.peso;
 	}
 
 }
