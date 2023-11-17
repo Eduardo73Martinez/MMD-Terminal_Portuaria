@@ -102,4 +102,13 @@ public class CircuitoMaritimo {
 		return null;
 	}
 
+	public Integer nroTerminalesTotalEntre(Terminal origen, Terminal destino) {
+		// TODO Auto-generated method stub
+		// Tengo el tramo origen
+		// Recorro los siguientes tramos y acumulo cantidad de terminales vistas
+		// Encuentro el tramo con el destino y corto
+		// Retorno el nro de terminales vistas acumuladas
+		return null;
+	}
+
 }
