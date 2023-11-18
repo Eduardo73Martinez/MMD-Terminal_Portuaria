@@ -27,7 +27,7 @@ public class CircuitoMaritimo {
 	/**
 	 * Requerimentos minimos necesarios:
 	 * 
-	 * 1) los tramos anterior y siguiente deben pertenecer a la coleccion de tramos
+	 * 1) el tramo anterior deben pertenecer a la coleccion de tramos.
 	 * 2) el tramoAnterior y tramoSiguiente dados son correlativos en el circuito
 	 * (que no quiere decir que estan ordenados en la coleccion) 3) el tramo nuevo
 	 * tiene en su terminal de origen una terminal nueva.
@@ -54,17 +54,17 @@ public class CircuitoMaritimo {
 		return this.tramos.get(this.tramos.size() - 1).equals(tramo);
 	}
 
-	private void validarDireccionRecorrido(Tramo tramo1, Tramo tramo2) {
+	private void validarDireccionRecorrido(Tramo tramo1, Tramo tramo2)  throws TramoExceptions{
 		// TODO Auto-generated method stub
 		if (!tramo1.getDestino().equals(tramo2.getOrigen())) {
-			throw new Error("El tramo1 no se dirige al tramo2 ");
+			throw new TramoExceptions("El tramo1 no se dirige al tramo2 ");
 		}
 	}
 
-	private void validarOrigenesDiferentes(Tramo tramo1, Tramo tramo2) {
+	private void validarOrigenesDiferentes(Tramo tramo1, Tramo tramo2) throws TramoExceptions{
 		// TODO Auto-generated method stub
 		if (tramo1.getOrigen().equals(tramo2.getOrigen())) {
-			throw new Error("Los origenes de ambos terminales son iguales");
+			throw new TramoExceptions("Los origenes de ambos terminales son iguales");
 		}
 
 	}
@@ -80,22 +80,22 @@ public class CircuitoMaritimo {
 
 	}
 
-	public void validarTramoNuevo(Tramo nuevoTramo) {
+	public void validarTramoNuevo(Tramo nuevoTramo)  throws TramoExceptions{
 		// TODO Auto-generated method stub
 		if (this.tramos.contains(nuevoTramo)) {
-			throw new Error("El tramo ya existe en el circuito ");
+			throw new TramoExceptions("El tramo ya existe en el circuito ");
 		}
 	}
 
-	public void validarExistencia(Tramo tramo) {
+	public void validarExistencia(Tramo tramo) throws TramoExceptions{
 		if (!this.tramos.contains(tramo)) {
-			throw new Error("El tramo dado no existe en el circuito");
+			throw new TramoExceptions("El tramo dado no existe en el circuito");
 		}
 	}
 
-	public void validarTerminalEnCircuito(Terminal terminalAValidar) {
+	public void validarTerminalEnCircuito(Terminal terminalAValidar)  throws TramoExceptions {
 		if (!this.perteneceAlCircuito(terminalAValidar)) {
-			throw new Error("La terminal dada no pertenece al circuito");
+			throw new TramoExceptions("La terminal dada no pertenece al circuito");
 		}
 	}
 
@@ -124,7 +124,7 @@ public class CircuitoMaritimo {
 		// Recorro los siguientes tramos y acumulo precio
 		// Encuentro el tramo con el destino y corto
 		// Retorno el precio acumulado
-		return (Double) null;
+		return (Double) null; 
 	}
 
 	public double tiempoTotalEntre(Terminal origen, Terminal destino) {
