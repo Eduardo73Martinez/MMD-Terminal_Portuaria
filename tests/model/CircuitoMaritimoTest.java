@@ -25,12 +25,8 @@ class CircuitoMaritimoTest {
 	private Tramo tramoNavegacion1;
 	private Tramo tramoNavegacion2;
 	private Tramo tramoNavegacion3;
-	private Tramo tramoNavegacion4;
 	
-	private ArrayList<Tramo> tramosDeCircuito = new ArrayList<>();
-	
-	
-	// agrego una terminal para testear la validacion al agregar los tramos 
+	// agrego una terminales para testear la validacion al agregar los tramos 
 	
 	private Terminal teminalOrigen1;
 	private Terminal teminalOrigen2;
@@ -42,25 +38,20 @@ class CircuitoMaritimoTest {
 		tramoNavegacion1 = mock(Tramo.class);
 		tramoNavegacion2 = mock(Tramo.class);
 		tramoNavegacion3 = mock(Tramo.class);
-		tramoNavegacion4 = mock(Tramo.class);
-		
-		tramosDeCircuito.add(tramoNavegacion1);
-		tramosDeCircuito.add(tramoNavegacion2);
-		tramosDeCircuito.add(tramoNavegacion3);
 		
 		// terminales
 		teminalOrigen1 = mock(Terminal.class);
 		teminalOrigen2 = mock(Terminal.class);
 		teminalDestino1 = mock(Terminal.class);
 		teminalDestino2 = mock(Terminal.class);
-		
-		circuito = new CircuitoMaritimo(tramosDeCircuito);
+		circuito = new CircuitoMaritimo(tramoNavegacion1, tramoNavegacion2);
 	}
 
 	@Test
 	void circuitoMartimoTest() {
+		
 		assertEquals(circuito.getClass(), CircuitoMaritimo.class);
-	}
+	} 
 	@Test
 	void agregarTramoALaListaDeTramosDelCircuito() {
 		// tramo anterior 
@@ -72,13 +63,13 @@ class CircuitoMaritimoTest {
 		when(tramoNavegacion2.getDestino()).thenReturn(teminalOrigen1);
 				
 		// tramo a agregar
-		when(tramoNavegacion4.getOrigen()).thenReturn(teminalOrigen2);
-		when(tramoNavegacion4.getDestino()).thenReturn(teminalDestino2);
+		when(tramoNavegacion3.getOrigen()).thenReturn(teminalOrigen2);
+		when(tramoNavegacion3.getDestino()).thenReturn(teminalDestino2);
 				
 				
-		circuito.agregarTramoEntre( tramoNavegacion4,tramoNavegacion1 , tramoNavegacion2 ) ; 
+		circuito.agregarTramoLuegoDe( tramoNavegacion3,tramoNavegacion2) ; 
 				
-		verify(tramoNavegacion4).getOrigen();
+		assertEquals(circuito.getTramos().size(),3);
 	}
 	@Test
 	void quitarTramoALaListaDeTramosDelCircuito() {
@@ -86,10 +77,10 @@ class CircuitoMaritimoTest {
 		assertEquals(circuito.getTramos().size(),2);
 	}
 	@Test
-	void getTramos() {
+	void getTramosTest() {
 		int cantidadDeCircuitos = circuito.getTramos().size();
-		assertEquals(cantidadDeCircuitos, 3);
-	}
+		assertEquals(cantidadDeCircuitos, 2);
+	} 
 	@Test
 	void validarAgregarTramoALaListaDeTramosDelCircuito() {
 		// tramo anterior 
@@ -101,30 +92,28 @@ class CircuitoMaritimoTest {
 		when(tramoNavegacion2.getDestino()).thenReturn(teminalOrigen1);
 		
 		// tramo a agregar
-		when(tramoNavegacion4.getOrigen()).thenReturn(teminalOrigen2);
-		when(tramoNavegacion4.getDestino()).thenReturn(teminalDestino2);
+		when(tramoNavegacion3.getOrigen()).thenReturn(teminalOrigen2);
+		when(tramoNavegacion3.getDestino()).thenReturn(teminalDestino2);
 		
 		
-		circuito.validarTramoEntre( tramoNavegacion4,tramoNavegacion1 , tramoNavegacion2 ) ; 
+		circuito.validarTramoNuevo( tramoNavegacion3 ) ; 
 		
 		verify(tramoNavegacion1).getDestino();
 		verify(tramoNavegacion2).getOrigen();
 	}
 	@Test
-	void getTiempoTotalDelRecorrido() {
+	void getTiempoTotalDelRecorridoTest() {
 		when(tramoNavegacion1.getTiempo()).thenReturn(300.0);
 		when(tramoNavegacion2.getTiempo()).thenReturn(500.0);
-		when(tramoNavegacion3.getTiempo()).thenReturn(10.0);
 		
 		circuito.tiempoTotalDelCircuito();
 		
 		verify(tramoNavegacion1).getTiempo();
 		verify(tramoNavegacion2).getTiempo();
-		verify(tramoNavegacion3).getTiempo();
 		
 	}
 	@Test
-	void excepcionAlAgregarUnTramo()  {
+	void excepcionAlAgregarUnTramoTest()  {
 		// tramo anterior 
 		when(tramoNavegacion1.getOrigen()).thenReturn(teminalOrigen1);
 		when(tramoNavegacion1.getDestino()).thenReturn(teminalDestino1);
@@ -133,31 +122,25 @@ class CircuitoMaritimoTest {
 		when(tramoNavegacion2.getOrigen()).thenReturn(teminalDestino1);
 		when(tramoNavegacion2.getDestino()).thenReturn(teminalOrigen1);
 				
-		// tramo a agregar
-		when(tramoNavegacion4.getOrigen()).thenReturn(teminalOrigen2);
-		when(tramoNavegacion4.getDestino()).thenReturn(teminalDestino2);
-				
-		assertThrows(Error.class, ()->{circuito.validarTramoEntre( tramoNavegacion4,tramoNavegacion1 , tramoNavegacion2 );}
+		//vamos a agregar el tramoNavegacion2 que ya esta en el circuito		
+		assertThrows(TramoExceptions.class, ()->{circuito.validarTramoNuevo( tramoNavegacion1);}
 		);
 		
-		//assertEquals(error.getMessage(), "Los tramos dados no son correlativos");
+		//assertEquals(error.getMessage(), "El tramo ya existe en el circuito");
 	}
 	@Test
-	void precioTotalDelCicuito()  {
+	void precioTotalDelCicuitoTest()  {
 		// tramo anterior 
 		when(tramoNavegacion1.getPrecio()).thenReturn(300.0);
 		when(tramoNavegacion2.getPrecio()).thenReturn(400.0);
-		when(tramoNavegacion3.getPrecio()).thenReturn(1000.0);
-				
 		//
 		circuito.precioTotal();
 		
 		verify(tramoNavegacion1).getPrecio();
 		verify(tramoNavegacion2).getPrecio();
-		verify(tramoNavegacion3).getPrecio();
 	}
 	@Test
-	void precioTotalEntreTerminales()  {
+	void precioTotalEntreTerminalesTest()  {
 		// tramo anterior 
 		when(tramoNavegacion1.getPrecio()).thenReturn(300.0);
 		when(tramoNavegacion2.getPrecio()).thenReturn(400.0);
@@ -171,7 +154,7 @@ class CircuitoMaritimoTest {
 		verify(tramoNavegacion3).getPrecio();
 	}
 	@Test
-	void validacionDeExistenciaDeTerminalesEnElCircuito()  {
+	void validacionDeExistenciaDeTerminalesEnElCircuitoTest()  {
 		// tramo anterior 
 		when(tramoNavegacion1.getOrigen()).thenReturn(teminalOrigen2);
 		when(tramoNavegacion2.getOrigen()).thenReturn(teminalOrigen2);
@@ -182,7 +165,38 @@ class CircuitoMaritimoTest {
 		
 		verify(tramoNavegacion1).getOrigen();
 		verify(tramoNavegacion2).getOrigen();
-		verify(tramoNavegacion3).getOrigen();
+		verify(tramoNavegacion3, never()).getOrigen();
+	}
+	@Test
+	void esUltimoTramoTest()  {
+		assertTrue(circuito.esUltimoTramo(tramoNavegacion2));
+	}
+	@Test
+	void validacionExistenciaDeTramoTest()  {
+		assertThrows(TramoExceptions.class, ()->{circuito.validarExistencia( tramoNavegacion3);}
+				);
+	}
+	@Test
+	void validarTerminalEnCircuitoTest() {
+		//no error
+		when(tramoNavegacion1.getOrigen()).thenReturn(teminalOrigen1);
+		when(tramoNavegacion1.getDestino()).thenReturn(teminalDestino1);
+		
+		assertDoesNotThrow(()->{circuito.perteneceAlCircuito(teminalDestino1);});
+	}
+	@Test
+	void validarDireccionRecorridoTest() {
+		// tramo anterior 
+		when(tramoNavegacion1.getOrigen()).thenReturn(teminalOrigen1);
+		when(tramoNavegacion1.getDestino()).thenReturn(teminalDestino2);
+						
+		//tramo siguiente 
+		when(tramoNavegacion2.getOrigen()).thenReturn(teminalDestino1);
+		when(tramoNavegacion2.getDestino()).thenReturn(teminalOrigen1);
+		
+		assertDoesNotThrow(()->{circuito.validarDireccionRecorrido(tramoNavegacion2,tramoNavegacion1);});
+		assertThrows(TramoExceptions.class, ()->{circuito.validarDireccionRecorrido(tramoNavegacion1,tramoNavegacion2);}
+				);
 	}
 
 }
