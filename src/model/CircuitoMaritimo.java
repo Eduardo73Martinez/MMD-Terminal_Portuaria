@@ -5,6 +5,7 @@ package model;
 
 import static org.mockito.ArgumentMatchers.same;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -15,38 +16,61 @@ import java.util.Optional;
 public class CircuitoMaritimo {
 	private ArrayList<Tramo> tramos;
 
+	public CircuitoMaritimo(Tramo inicio, Tramo fin) {
+		//this.validarOrigenesDiferentes(inicio, fin);
+		//this.validarDireccionRecorrido(inicio, fin);
+		//this.validarDireccionRecorrido(fin, inicio);
+		this.tramos = new ArrayList<>();
+		this.tramos.add(inicio);
+		this.tramos.add(fin);
+		// si o si cuando se instancia un circuito se agregan dos tramos.
+	}
+
 	/**
 	 * Requerimentos minimos necesarios:
 	 * 
-	 * 1) los tramos anterior y siguiente deben pertenecer a la coleccion de tramos
+	 * 1) el tramo anterior deben pertenecer a la coleccion de tramos.
 	 * 2) el tramoAnterior y tramoSiguiente dados son correlativos en el circuito
-	 * (que no quiere decir que estan ordenados en la coleccion) 3) el tramo nuevo
-	 * tiene en su terminal de origen una terminal nueva.
+	 * 3) el tramo nuevo tiene en su terminal de origen una terminal nueva.
 	 */
-	public void agregarTramoEntre(Tramo nuevoTramo, Tramo tramoAnterior, Tramo tramoSiguiente) {
+	public void agregarTramoLuegoDe(Tramo nuevoTramo, Tramo tramoAnterior) {
 
-		this.validarTramoEntre(nuevoTramo, tramoAnterior, tramoSiguiente); // verifica los requerimentos.
-		// los sacamos del array para actualizarlos
-		this.quitarTramo(tramoAnterior);
-		this.quitarTramo(tramoSiguiente);
+		this.validarTramoNuevo(nuevoTramo);
+		this.validarExistencia(tramoAnterior);
 
-		// los actualizamos con las nuevas terminales
-		tramoAnterior.setDestino(nuevoTramo.getOrigen());
-		nuevoTramo.setDestino(tramoSiguiente.getOrigen());
-		tramoSiguiente.setOrigen(nuevoTramo.getDestino());
+		int indiceTAnterior = this.tramos.indexOf(tramoAnterior);
 
-		// los agregamos a la coleccion
-		this.tramos.add(tramoAnterior);
-		this.tramos.add(nuevoTramo);
-		this.tramos.add(tramoSiguiente);
+		if (this.esUltimoTramo(tramoAnterior)) {
+			nuevoTramo.setDestino(this.tramos.get(0).getOrigen());
+		} else {
+			nuevoTramo.setDestino(this.tramos.get(indiceTAnterior + 1).getOrigen());
+		}
+		this.tramos.get(indiceTAnterior).setDestino(nuevoTramo.getOrigen());
+		this.tramos.add(indiceTAnterior + 1, nuevoTramo);
+
+	}  
+
+	public boolean esUltimoTramo(Tramo tramo) {
+		// TODO Auto-generated method stub
+		return this.tramos.get(this.tramos.size() - 1).equals(tramo);
 	}
 
-	public CircuitoMaritimo(ArrayList<Tramo> tramos) {
-		super();
-		this.tramos = tramos;
+	public void validarDireccionRecorrido(Tramo tramo1, Tramo tramo2)  throws TramoExceptions{
+		// TODO Auto-generated method stub
+		if (!tramo1.getDestino().equals(tramo2.getOrigen())) {
+			throw new TramoExceptions("El tramo1 no se dirige al tramo2 ");
+		}
 	}
 
-	public ArrayList<Tramo> getTramos() {
+	public void validarOrigenesDiferentes(Tramo tramo1, Tramo tramo2) throws TramoExceptions{
+		// TODO Auto-generated method stub
+		if (tramo1.getOrigen().equals(tramo2.getOrigen())) {
+			throw new TramoExceptions("Los origenes de ambos terminales son iguales");
+		}
+
+	}
+
+	public List<Tramo> getTramos() {
 		// TODO Auto-generated method stub
 		return this.tramos;
 	}
@@ -57,25 +81,25 @@ public class CircuitoMaritimo {
 
 	}
 
-	public void validarTramoEntre(Tramo nuevoTramo, Tramo tramoAnterior, Tramo tramoSiguiente) {
-		// TODO Auto-generated method stub
-		if (!this.tramos.contains(tramoAnterior) && !this.tramos.contains(tramoSiguiente)) {
-			throw new Error("Alguno de los tramos dados no pertenece al circuito");
+	public void validarTramoNuevo(Tramo nuevoTramo)  throws TramoExceptions{
+		if (this.tramos.contains(nuevoTramo)) {
+			throw new TramoExceptions("El tramo ya existe en el circuito ");
 		}
-		if (tramoAnterior.getDestino() != tramoSiguiente.getOrigen()) {
-			throw new Error("Los tramos dados no son correlativos");
-		}
-
 	}
 
-	public void validarTerminalEnCircuito(Terminal terminalAValidar) {
+	public void validarExistencia(Tramo tramo) throws TramoExceptions{
+		if (!this.tramos.contains(tramo)) {
+			throw new TramoExceptions("El tramo dado no existe en el circuito");
+		}
+	} 
+
+	public void validarTerminalEnCircuito(Terminal terminalAValidar)  throws TramoExceptions {
 		if (!this.perteneceAlCircuito(terminalAValidar)) {
-			throw new Error("La terminal dada no pertenece al circuito");
+			throw new TramoExceptions("La terminal dada no pertenece al circuito");
 		}
-	}
+	} 
 
 	public boolean perteneceAlCircuito(Terminal terminal) {
-		// TODO Auto-generated method stub
 		return this.tramos.stream().anyMatch(s -> s.getOrigen() == terminal);
 	}
 
@@ -84,16 +108,13 @@ public class CircuitoMaritimo {
 	}
 
 	public double precioTotal() {
-		// TODO Auto-generated method stub
 		return this.tramos.stream().mapToDouble(s -> s.getPrecio()).sum();
 	}
 
 	public double precioTotalEntre(Terminal teminalOrigen, Terminal teminalDestino) {
-		// TODO Auto-generated method stub
 		Optional<Tramo> tramoOrigen =  this.tramos.stream()
 				.filter(t -> t.getOrigen().equals(teminalOrigen))
 				.findFirst(); 
-		// TODO Auto-generated method stub
 		this.validarTerminalEnCircuito(teminalOrigen);
 		this.validarTerminalEnCircuito(teminalDestino);
 		ArrayList<Tramo> tramosRecorridos;
@@ -101,11 +122,10 @@ public class CircuitoMaritimo {
 		// Recorro los siguientes tramos y acumulo precio
 		// Encuentro el tramo con el destino y corto
 		// Retorno el precio acumulado
-		return (Double) null;
+		return (Double) null; 
 	}
 
 	public double tiempoTotalEntre(Terminal origen, Terminal destino) {
-		// TODO Auto-generated method stub
 		// Tengo el tramo origen
 		// Recorro los siguientes tramos y acumulo tiempo
 		// Encuentro el tramo con el destino y corto
@@ -114,12 +134,11 @@ public class CircuitoMaritimo {
 	}
 
 	public Integer nroTerminalesTotalEntre(Terminal origen, Terminal destino) {
-		// TODO Auto-generated method stub
 		// Tengo el tramo origen
 		// Recorro los siguientes tramos y acumulo cantidad de terminales vistas
 		// Encuentro el tramo con el destino y corto
 		// Retorno el nro de terminales vistas acumuladas
 		return null;
-  }
+	}
 
 }
