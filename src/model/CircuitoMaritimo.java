@@ -82,7 +82,6 @@ public class CircuitoMaritimo {
 	}
 
 	public void validarTramoNuevo(Tramo nuevoTramo)  throws TramoExceptions{
-		// TODO Auto-generated method stub
 		if (this.tramos.contains(nuevoTramo)) {
 			throw new TramoExceptions("El tramo ya existe en el circuito ");
 		}
@@ -101,7 +100,6 @@ public class CircuitoMaritimo {
 	} 
 
 	public boolean perteneceAlCircuito(Terminal terminal) {
-		// TODO Auto-generated method stub
 		return this.tramos.stream().anyMatch(s -> s.getOrigen() == terminal);
 	}
 
@@ -110,7 +108,6 @@ public class CircuitoMaritimo {
 	}
 
 	public double precioTotal() {
-		// TODO Auto-generated method stub
 		return this.tramos.stream().mapToDouble(s -> s.getPrecio()).sum();
 	}
 
@@ -129,7 +126,6 @@ public class CircuitoMaritimo {
 	}
 
 	public double tiempoTotalEntre(Terminal origen, Terminal destino) {
-		// TODO Auto-generated method stub
 		// Tengo el tramo origen
 		// Recorro los siguientes tramos y acumulo tiempo
 		// Encuentro el tramo con el destino y corto
@@ -138,7 +134,6 @@ public class CircuitoMaritimo {
 	}
 
 	public Integer nroTerminalesTotalEntre(Terminal origen, Terminal destino) {
-		// TODO Auto-generated method stub
 		// Tengo el tramo origen
 		// Recorro los siguientes tramos y acumulo cantidad de terminales vistas
 		// Encuentro el tramo con el destino y corto
