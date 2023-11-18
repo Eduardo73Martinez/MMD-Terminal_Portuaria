@@ -32,6 +32,7 @@ class CircuitoMaritimoTest {
 	private Terminal teminalOrigen2;
 	private Terminal teminalDestino1;
 	private Terminal teminalDestino2;
+	private Terminal terminalDestinoNoAgregada;
 	
 	@BeforeEach
 	void setUp() throws Exception {
@@ -44,6 +45,7 @@ class CircuitoMaritimoTest {
 		teminalOrigen2 = mock(Terminal.class);
 		teminalDestino1 = mock(Terminal.class);
 		teminalDestino2 = mock(Terminal.class);
+		terminalDestinoNoAgregada = mock(Terminal.class);
 		circuito = new CircuitoMaritimo(tramoNavegacion1, tramoNavegacion2);
 	}
 
@@ -98,8 +100,7 @@ class CircuitoMaritimoTest {
 		
 		circuito.validarTramoNuevo( tramoNavegacion3 ) ; 
 		
-		verify(tramoNavegacion1).getDestino();
-		verify(tramoNavegacion2).getOrigen();
+		assertEquals(circuito.getTramos().size(),3);
 	}
 	@Test
 	void getTiempoTotalDelRecorridoTest() {
@@ -178,11 +179,18 @@ class CircuitoMaritimoTest {
 	}
 	@Test
 	void validarTerminalEnCircuitoTest() {
-		//no error
+		// tramo anterior
 		when(tramoNavegacion1.getOrigen()).thenReturn(teminalOrigen1);
 		when(tramoNavegacion1.getDestino()).thenReturn(teminalDestino1);
-		
-		assertDoesNotThrow(()->{circuito.perteneceAlCircuito(teminalDestino1);});
+				
+		//tramo siguiente 
+		when(tramoNavegacion2.getOrigen()).thenReturn(teminalDestino1);
+		when(tramoNavegacion2.getDestino()).thenReturn(teminalOrigen1);
+		//no error
+		assertDoesNotThrow(()->{circuito.validarTerminalEnCircuito(teminalDestino1);});
+		//error
+		assertThrows(TramoExceptions.class, ()->{circuito.validarTerminalEnCircuito(terminalDestinoNoAgregada);}
+				);
 	}
 	@Test
 	void validarDireccionRecorridoTest() {
@@ -197,6 +205,18 @@ class CircuitoMaritimoTest {
 		assertDoesNotThrow(()->{circuito.validarDireccionRecorrido(tramoNavegacion2,tramoNavegacion1);});
 		assertThrows(TramoExceptions.class, ()->{circuito.validarDireccionRecorrido(tramoNavegacion1,tramoNavegacion2);}
 				);
+	}
+	@Test
+	void validarOrigenesDiferentesTest() {
+		when(tramoNavegacion1.getOrigen()).thenReturn(teminalOrigen1);
+		
+		//tramo siguiente 
+		when(tramoNavegacion2.getOrigen()).thenReturn(teminalOrigen1);
+		
+		assertThrows(TramoExceptions.class, ()->{circuito.validarOrigenesDiferentes(tramoNavegacion1,tramoNavegacion2);}
+				);
+		when(tramoNavegacion2.getOrigen()).thenReturn(teminalOrigen2);
+		assertDoesNotThrow(()->{circuito.validarOrigenesDiferentes(tramoNavegacion2,tramoNavegacion1);});
 	}
 
 }
