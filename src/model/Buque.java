@@ -40,4 +40,19 @@ public class Buque {
 						 , (p1.getLongitud() - p2.getLongitud()) );
 	}
 
+	public BuqueState getFase() {
+		// TODO Auto-generated method stub
+		return this.fase;
+	}
+
+	public void cambiarFase(Buque b) {
+		// TODO Auto-generated method stub
+		this.fase.siguiente(b);
+	}
+
+	protected void setFase(BuqueState fase) {
+		// TODO Auto-generated method stub
+		this.fase = fase;
+	}
+
 }
