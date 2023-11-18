@@ -115,9 +115,9 @@ public class CircuitoMaritimo {
 	}
 
 	public double precioTotalEntre(Terminal teminalOrigen, Terminal teminalDestino) {
-
-		Optional<Tramo> tramoOrigen = this.tramos.stream().filter(t -> t.getOrigen().equals(teminalOrigen)).findFirst();
- 
+		Optional<Tramo> tramoOrigen =  this.tramos.stream()
+				.filter(t -> t.getOrigen().equals(teminalOrigen))
+				.findFirst(); 
 		this.validarTerminalEnCircuito(teminalOrigen);
 		this.validarTerminalEnCircuito(teminalDestino);
 		ArrayList<Tramo> tramosRecorridos;
