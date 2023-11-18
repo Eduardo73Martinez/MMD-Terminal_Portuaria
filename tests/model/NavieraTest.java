@@ -76,9 +76,9 @@ class NavieraTest {
 		buques.add(buque2);
 		
 		// instancio una clase que implemento yo
-		circuito1 = new CircuitoMaritimo(null);
-		circuito2 = new CircuitoMaritimo(null);
-		circuito3 = new CircuitoMaritimo(null);
+		circuito1 = mock(CircuitoMaritimo.class);
+		circuito2 = mock(CircuitoMaritimo.class);
+		circuito3 = mock(CircuitoMaritimo.class);
 		
 		//agrego al array
 		circuitos.add(circuito1);
