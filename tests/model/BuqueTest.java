@@ -35,11 +35,12 @@ public class BuqueTest {
 	@BeforeEach
 	public void setUp() {
 		// DOC (Depended-On-Component): nuestros doubles
-		this.terminal 	= spy(Terminal.class);
-		this.gps		= spy(new GPS(1));
-		this.carga1 	= mock(Carga.class);
-		this.carga2 	= mock(Carga.class);
-		this.carga3 	= mock(Carga.class);
+		this.terminal 		= spy(Terminal.class);
+		this.gps			= spy(new GPS(1));
+		this.stateInbound	= spy(Inbound.class);
+		this.carga1 		= mock(Carga.class);
+		this.carga2 		= mock(Carga.class);
+		this.carga3 		= mock(Carga.class);
 		
 		this.cargas.add(carga1);
 		this.cargas.add(carga2);
@@ -47,7 +48,7 @@ public class BuqueTest {
 		when(this.gps.getPosicion()).thenReturn(posicion1);
 
 		// SUT (System Under Test): objeto a testear
-		this.buque = new Buque(stateOutbound, gps, viaje);
+		this.buque = new Buque(stateInbound, gps, viaje);
 	}
 
 	@Test
@@ -67,5 +68,12 @@ public class BuqueTest {
 		when(this.terminal.getPosicion()).thenReturn(posicion2);
 		float distanciaEsperada = 2;
 		assertEquals(distanciaEsperada, this.buque.distanciaA(this.terminal));
+	}
+	
+	@Test
+	void testCambiarFase() {
+		assertEquals(stateInbound, buque.getFase());
+		buque.cambiarFase(buque);
+		assertEquals(stateArrived, buque.getFase());	
 	}
 }
