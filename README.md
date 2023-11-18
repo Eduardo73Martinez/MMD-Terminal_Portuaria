@@ -14,6 +14,6 @@ Link a la documentación [acá](https://docs.google.com/document/d/1P8Maf2JmJP85
 
 ## Integrantes 
 
-- Cesaro Daniel
+- Cesaro Daniel           - danielcesaro@hotmail.com
 - González Buitrón Martín - martingonzalezbuitron@gmail.com
 - Martinez Eduardo        - mm7735608@gmail.com
