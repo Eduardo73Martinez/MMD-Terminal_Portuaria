@@ -206,5 +206,17 @@ class CircuitoMaritimoTest {
 		assertThrows(TramoExceptions.class, ()->{circuito.validarDireccionRecorrido(tramoNavegacion1,tramoNavegacion2);}
 				);
 	}
+	@Test
+	void validarOrigenesDiferentesTest() {
+		when(tramoNavegacion1.getOrigen()).thenReturn(teminalOrigen1);
+		
+		//tramo siguiente 
+		when(tramoNavegacion2.getOrigen()).thenReturn(teminalOrigen1);
+		
+		assertThrows(TramoExceptions.class, ()->{circuito.validarOrigenesDiferentes(tramoNavegacion1,tramoNavegacion2);}
+				);
+		when(tramoNavegacion2.getOrigen()).thenReturn(teminalOrigen2);
+		assertDoesNotThrow(()->{circuito.validarOrigenesDiferentes(tramoNavegacion2,tramoNavegacion1);});
+	}
 
 }
