@@ -4,8 +4,13 @@ public class Departing implements BuqueState {
 
 	private Outbound faseSiguiente;
 
+	public Departing(Outbound fase) {
+		this.faseSiguiente = fase;
+	}
+
 	@Override
-	public void siguiente(Buque buque) {
-		buque.setFase(this.faseSiguiente);
+	public Outbound siguiente() {
+//		this.faseSiguiente = (Outbound) fase;
+		return this.faseSiguiente;
 	}
 }

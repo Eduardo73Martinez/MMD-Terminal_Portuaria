@@ -45,9 +45,9 @@ public class Buque {
 		return this.fase;
 	}
 
-	public void cambiarFase(Buque b) {
+	public void cambiarFase() {
 		// TODO Auto-generated method stub
-		this.fase.siguiente(b);
+		this.setFase(this.fase.siguiente());
 	}
 
 	protected void setFase(BuqueState fase) {
