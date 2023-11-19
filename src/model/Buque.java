@@ -7,21 +7,19 @@ public class Buque {
 
 	private BuqueState		fase;
 	private List<Carga> 	cargas 	 = new ArrayList<Carga>();
-	private Posicion		posicion;
 	private GPS				gps;
 	private Viaje			viaje;
-
+ 
 	public Buque(BuqueState fase, GPS gps, Viaje viaje) {
 		// TODO Auto-generated constructor stub
 		this.fase = fase;
 		this.viaje = viaje;
 		this.gps = gps;
-		this.posicion = this.gps.getPosicion();
 	}
 
 	private Posicion getPosicion() {
 		// TODO Auto-generated method stub
-		return this.posicion;
+		return this.gps.getPosicion();
 	}
 
 	public void preavisoA(Terminal terminal) {
