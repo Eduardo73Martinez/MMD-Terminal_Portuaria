@@ -73,4 +73,9 @@ public class GPS extends TimerTask {
 		int dy = diferenciales.get(random.nextInt(diferenciales.size()));
 		return (dx == 0 && dy == 0) ? posicion : new Posicion(posicion.getLatitud() + dx, posicion.getLongitud() + dy);
 	}
+
+	public Buque getBuque() {
+		// TODO Auto-generated method stub
+		return this.buque;
+	}
 }

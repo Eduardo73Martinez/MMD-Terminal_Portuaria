@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 public class GPSTest {
 
 	private GPS				gps;
+	private GPS				gps1;
 	
 	private Posicion		posicion1 = new Posicion(2, 3);
 	private Posicion		posicion2 = new Posicion(2, 5);
@@ -43,16 +44,26 @@ public class GPSTest {
 
 		// SUT (System Under Test): objeto a testear
 		this.gps = new GPS(this.time1, this.buque);
+		this.gps1 = new GPS(this.time1, this.posicion1);
 	}
 
 	@Test
 	void testConstructor() {
 		assertNotNull(this.gps);
+		assertNotNull(this.gps1);
 	}
 
 	@Test
 	public void testGetPosicion() {
 		assertEquals(this.posicion1, this.gps.getPosicion());
+	}
+
+	@Test
+	public void testSetBuque() {
+		assertEquals(this.buque, this.gps.getBuque());
+		assertEquals(null, this.gps1.getBuque());
+		this.gps1.setBuque(this.buque);
+		assertEquals(this.buque, this.gps1.getBuque());
 	}
 
 	@Test
