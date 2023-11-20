@@ -15,10 +15,6 @@ public class Departing implements BuqueState {
 		return this.faseSiguiente;
 	}
 
-	public Departing(Outbound fase) {
-		this.faseSiguiente = fase;
-	}
-
 	@Override
 	public boolean hayPosibilidadDeCambio(Buque buque) {
 		// TODO Auto-generated method stub

@@ -17,12 +17,6 @@ public class Outbound implements BuqueState {
 		return this.faseSiguiente;
 	}
 
-	public Outbound() {}
-
-	public void setSiguiente(Inbound fase) {
-		this.faseSiguiente = fase;
-	}
-
 	@Override
 	public boolean hayPosibilidadDeCambio(Buque buque) {
 		// TODO Auto-generated method stub
