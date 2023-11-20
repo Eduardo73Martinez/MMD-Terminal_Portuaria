@@ -10,7 +10,7 @@ public class Working implements BuqueState {
 
 	@Override
 	public Departing siguiente(Buque b) {
-//		this.faseSiguiente = (Departing) fase;
+		b.recibir(this.faseSiguiente);
 		return this.faseSiguiente;
 	}
 

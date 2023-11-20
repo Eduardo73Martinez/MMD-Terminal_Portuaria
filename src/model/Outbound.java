@@ -13,7 +13,7 @@ public class Outbound implements BuqueState {
 
 	@Override
 	public Inbound siguiente(Buque b) {
-//		this.faseSiguiente = (Inbound) fase;
+		b.recibir(this.faseSiguiente);
 		return this.faseSiguiente;
 	}
 

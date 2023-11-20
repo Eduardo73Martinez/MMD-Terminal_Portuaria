@@ -11,7 +11,6 @@ public class Inbound implements BuqueState {
 
 	@Override
 	public Arrived siguiente(Buque b) {
-//		this.faseSiguiente = (Arrived) fase;
 		b.recibir(this.faseSiguiente);
 		return this.faseSiguiente;
 	}

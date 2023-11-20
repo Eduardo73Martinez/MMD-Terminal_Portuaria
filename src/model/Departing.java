@@ -11,7 +11,7 @@ public class Departing implements BuqueState {
 
 	@Override
 	public Outbound siguiente(Buque b) {
-//		this.faseSiguiente = (Outbound) fase;
+		b.recibir(this.faseSiguiente);
 		return this.faseSiguiente;
 	}
 
