@@ -17,4 +17,12 @@ public class Email {
 		this.orden = orden;
 	}
 
+	public String getMensaje() {
+		return mensaje;
+	}
+
+	public OrdenBasicaTP getOrden() {
+		return orden;
+	}
+
 }
