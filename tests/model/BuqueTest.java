@@ -38,7 +38,7 @@ public class BuqueTest {
 		// DOC (Depended-On-Component): nuestros doubles
 		this.terminal 		= mock(Terminal.class);
 		this.viaje			= spy(Viaje.class);
-		this.gps			= spy(new GPS(10000, posicion1));
+		this.gps			= spy(new GPS(1, posicion1));
 
 		this.stateOutbound  = spy(new Outbound());
 		this.stateDeparting	= spy(new Departing(stateOutbound));
@@ -86,17 +86,25 @@ public class BuqueTest {
 	
 
 	@Test
-	void testCambiarFaseCiclo() {
+	void testCambiarFaseCiclo() throws InterruptedException {
 		assertEquals(stateInbound, buque.getFase());
+//		this.gps.activar();
+//		when(this.gps.getPosicion()).thenReturn(this.posicion2);
+//		assertEquals(this.posicion2, this.gps.getPosicion());
 		// Cambiar posicion del buque
+		this.buque.update();
 		assertEquals(stateArrived, buque.getFase());
 		// Cambiar posicion del buque
+		this.buque.update();
 		assertEquals(stateWorking, buque.getFase());
 		// Cambiar posicion del buque
+		this.buque.update();
 		assertEquals(stateDeparting, buque.getFase());
 		// Cambiar posicion del buque
+		this.buque.update();
 		assertEquals(stateOutbound, buque.getFase());
 		// Cambiar posicion del buque
+		this.buque.update();
 		assertEquals(stateInbound, buque.getFase());
 	}
 }

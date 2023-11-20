@@ -92,12 +92,12 @@ public class Buque {
 
 	public boolean hayOrdenDeDepart() {
 		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 	public boolean hayOrdenDeWorking() {
 		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 
