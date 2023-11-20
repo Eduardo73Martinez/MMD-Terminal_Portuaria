@@ -97,4 +97,8 @@ public class BuqueTest {
 		this.buque.cambiarFase();
 		assertEquals(stateInbound, buque.getFase());
 	}
+	@Test
+	void enviarEmail() {
+		
+	}
 }
