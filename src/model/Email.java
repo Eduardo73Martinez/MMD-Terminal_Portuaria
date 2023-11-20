@@ -8,14 +8,13 @@ package model;
  *
  */
 public class Email {
-	private String Mensaje;
-	private  OrdenImportacion orden;
-	
-	public Email(String mensaje, OrdenImportacion orden) {
+	private String mensaje;
+	private OrdenBasicaTP orden;
+
+	public Email(String mensaje, OrdenBasicaTP orden) {
 		super();
-		Mensaje = mensaje;
+		this.mensaje = mensaje;
 		this.orden = orden;
 	}
-	
 
 }

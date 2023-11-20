@@ -10,4 +10,6 @@ public interface Terminal {
 	public void recibirPreavisoPor(Buque buque);
 
 	public Posicion getPosicion();
+
+	public void recibirEmail(Email email);
 }

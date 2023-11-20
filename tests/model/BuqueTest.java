@@ -31,6 +31,8 @@ public class BuqueTest {
 	private Carga			carga1;
 	private Carga			carga2;
 	private Carga			carga3;
+	private Email 			email;
+	private OrdenBasicaTP 	orden = mock(OrdenBasicaTP.class);
 	
 	
 	@BeforeEach
@@ -47,6 +49,8 @@ public class BuqueTest {
 		this.carga1 		= mock(Carga.class);
 		this.carga2 		= mock(Carga.class);
 		this.carga3 		= mock(Carga.class);
+		this.email 			= mock(Email.class);
+		this.viaje 			= mock(Viaje.class);
 		
 		this.cargas.add(carga1);
 		this.cargas.add(carga2);
@@ -98,7 +102,9 @@ public class BuqueTest {
 		assertEquals(stateInbound, buque.getFase());
 	}
 	@Test
-	void enviarEmail() {
-		
+	void enviarEmailTest() {
+		when(viaje.getOrden()).thenReturn(orden);
+		buque.enviarEmailA(terminal);
+		verify(viaje).getOrden();
 	}
 }
