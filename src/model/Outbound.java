@@ -3,6 +3,7 @@ package model;
 public class Outbound implements BuqueState {
 
 	private Inbound faseSiguiente;
+	private float kmANuevaTerminal = 50; //Kms
 
 	public Outbound() {}
 
@@ -11,8 +12,21 @@ public class Outbound implements BuqueState {
 	}
 
 	@Override
-	public Inbound siguiente() {
-//		this.faseSiguiente = (Inbound) fase;
+	public Inbound siguiente(Buque b) {
+		b.recibir(this.faseSiguiente);
 		return this.faseSiguiente;
+	}
+
+	public Outbound() {}
+
+	public void setSiguiente(Inbound fase) {
+		this.faseSiguiente = fase;
+	}
+
+	@Override
+	public boolean hayPosibilidadDeCambio(Buque buque) {
+		// TODO Auto-generated method stub
+		return (buque.kmsProximaTerminal() != 0 &&
+				buque.kmsProximaTerminal() > this.kmANuevaTerminal);
 	}
 }

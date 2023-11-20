@@ -25,8 +25,10 @@ public class BuqueTest {
 	private GPS				gps;
 	private Viaje			viaje;
 
-	private Terminal		terminal;
-	private Posicion		posicion2 = new Posicion(2, 5);
+	private Terminal		terminal1;
+	private Terminal		terminal2;
+	private Posicion		posicion2 = new Posicion(2, 4);
+	private Posicion		posicion3 = new Posicion(2, 60);
 	
 	private Carga			carga1;
 	private Carga			carga2;
@@ -38,27 +40,33 @@ public class BuqueTest {
 	@BeforeEach
 	public void setUp() {
 		// DOC (Depended-On-Component): nuestros doubles
-		this.terminal 		= mock(Terminal.class);
-		this.gps			= mock(GPS.class);
-		this.stateOutbound	= spy(new Outbound());
+
+		this.terminal1 		= mock(Terminal.class);
+		this.terminal2 		= mock(Terminal.class);
+		this.viaje			  = mock(Viaje.class);
+		this.gps			    = spy(new GPS(1, posicion1));
+    this.email 			  = mock(Email.class);
+
+		this.stateOutbound  = spy(new Outbound());
 		this.stateDeparting	= spy(new Departing(stateOutbound));
 		this.stateWorking	= spy(new Working(stateDeparting));
 		this.stateArrived	= spy(new Arrived(stateWorking));
 		this.stateInbound	= spy(new Inbound(stateArrived));
 		this.stateOutbound.setSiguiente(stateInbound);
+
 		this.carga1 		= mock(Carga.class);
 		this.carga2 		= mock(Carga.class);
 		this.carga3 		= mock(Carga.class);
-		this.email 			= mock(Email.class);
-		this.viaje 			= mock(Viaje.class);
-		
 		this.cargas.add(carga1);
 		this.cargas.add(carga2);
 		this.cargas.add(carga3);
-		when(this.gps.getPosicion()).thenReturn(posicion1);
+
+		when(this.terminal1.getPosicion()).thenReturn(this.posicion1);
+
+		when(this.viaje.getProximaTerminal()).thenReturn(this.terminal1);
 
 		// SUT (System Under Test): objeto a testear
-		this.buque = new Buque(stateInbound, gps, viaje);
+		this.buque = new Buque(stateInbound, viaje, gps);
 	}
 
 	@Test
@@ -68,39 +76,44 @@ public class BuqueTest {
 
 	@Test
 	public void testPreavisoA() {
-		assertFalse(this.terminal.hayBuqueCerca());
-		this.buque.preavisoA(this.terminal);
-		assertTrue(this.terminal.hayBuqueCerca());
+		assertFalse(this.terminal1.hayBuqueCerca());
+		this.buque.preavisoA(this.terminal1);
+		assertTrue(this.terminal1.hayBuqueCerca());
 	}
 
 	@Test
 	public void testDistanciaA() {
-		when(this.terminal.getPosicion()).thenReturn(posicion2);
-		float distanciaEsperada = 2;
-		assertEquals(distanciaEsperada, this.buque.distanciaA(this.terminal));
+		when(this.terminal1.getPosicion()).thenReturn(posicion2);
+		// Posible solucion a las posiciones random del buque.
+		Posicion posicionBuque = this.buque.getPosicion();
+		Posicion posicionTerminal = this.terminal1.getPosicion();
+		float distanciaEsperada = (float) Math.hypot( (posicionBuque.getLatitud() - posicionTerminal.getLatitud())
+				 , (posicionBuque.getLongitud() - posicionTerminal.getLongitud()) );
+		assertEquals(distanciaEsperada, this.buque.distanciaA(this.terminal1));
 	}
 	
 	@Test
-	void testSetFase() {
+	void testCambiarFaseCiclo() throws InterruptedException {
 		assertEquals(stateInbound, buque.getFase());
-		this.buque.setFase(stateArrived);
+		// Cambiar posicion del buque
+		this.buque.update();
 		assertEquals(stateArrived, buque.getFase());
+		// Cambiar posicion del buque
+		this.buque.update();
+		assertEquals(stateWorking, buque.getFase());
+		// Cambiar posicion del buque
+		this.buque.update();
+		assertEquals(stateDeparting, buque.getFase());
+		// Cambiar posicion del buque
+		when(this.terminal1.getPosicion()).thenReturn(this.posicion2);
+		this.buque.update();
+		assertEquals(stateOutbound, buque.getFase());
+		// Cambiar posicion del buque
+		when(this.terminal1.getPosicion()).thenReturn(this.posicion3);
+		this.buque.update();
+		assertEquals(stateInbound, buque.getFase());
 	}
 
-	@Test
-	void testCambiarFaseCiclo() {
-		assertEquals(stateInbound, buque.getFase());
-		this.buque.cambiarFase();
-		assertEquals(stateArrived, buque.getFase());
-		this.buque.cambiarFase();
-		assertEquals(stateWorking, buque.getFase());
-		this.buque.cambiarFase();
-		assertEquals(stateDeparting, buque.getFase());
-		this.buque.cambiarFase();
-		assertEquals(stateOutbound, buque.getFase());
-		this.buque.cambiarFase();
-		assertEquals(stateInbound, buque.getFase());
-	}
 	@Test
 	void enviarEmailTest() {
 		when(viaje.getOrden()).thenReturn(orden);

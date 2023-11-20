@@ -72,4 +72,9 @@ public class Viaje {
 	}
 	
 
+	public Terminal getProximaTerminal() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
