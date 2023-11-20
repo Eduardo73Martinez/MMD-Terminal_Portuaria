@@ -50,9 +50,6 @@ public class GPS extends TimerTask {
 
 	public void setPeriodo(long periodoNuevo) {
 		this.periodo = periodoNuevo;
-		if (this.reportar) {
-			this.buque.update(); // ¿hay que cambiar de fase?
-		}
 	}
 
 	public void setBuque(Buque b) {
@@ -63,7 +60,10 @@ public class GPS extends TimerTask {
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub
-		this.setPosicion(this.obtenerPosicion());		
+		this.setPosicion(this.obtenerPosicion());
+		if (this.reportar) {
+			this.buque.update(); // ¿hay que cambiar de fase?
+		}
 	}
 
 	public Posicion obtenerPosicion() {
