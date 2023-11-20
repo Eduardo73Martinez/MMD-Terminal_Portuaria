@@ -4,8 +4,13 @@ public class Arrived implements BuqueState {
 
 	private Working faseSiguiente;
 
+	public Arrived(Working fase) {
+		this.faseSiguiente = fase;
+	}
+
 	@Override
-	public void siguiente(Buque buque) {
-		buque.setFase(this.faseSiguiente);
+	public Working siguiente() {
+//		this.faseSiguiente = (Working) fase;
+		return this.faseSiguiente;
 	}
 }

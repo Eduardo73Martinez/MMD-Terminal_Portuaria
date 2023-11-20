@@ -5,6 +5,8 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import net.bytebuddy.agent.builder.AgentBuilder.CircularityLock.Inactive;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,17 +31,26 @@ public class BuqueTest {
 	private Carga			carga1;
 	private Carga			carga2;
 	private Carga			carga3;
+	private Email 			email;
+	private OrdenBasicaTP 	orden = mock(OrdenBasicaTP.class);
 	
 	
 	@BeforeEach
 	public void setUp() {
 		// DOC (Depended-On-Component): nuestros doubles
-		this.terminal 		= spy(Terminal.class);
-		this.gps			= spy(new GPS(1));
-		this.stateInbound	= spy(Inbound.class);
+		this.terminal 		= mock(Terminal.class);
+		this.gps			= mock(GPS.class);
+		this.stateOutbound	= spy(new Outbound());
+		this.stateDeparting	= spy(new Departing(stateOutbound));
+		this.stateWorking	= spy(new Working(stateDeparting));
+		this.stateArrived	= spy(new Arrived(stateWorking));
+		this.stateInbound	= spy(new Inbound(stateArrived));
+		this.stateOutbound.setSiguiente(stateInbound);
 		this.carga1 		= mock(Carga.class);
 		this.carga2 		= mock(Carga.class);
 		this.carga3 		= mock(Carga.class);
+		this.email 			= mock(Email.class);
+		this.viaje 			= mock(Viaje.class);
 		
 		this.cargas.add(carga1);
 		this.cargas.add(carga2);
@@ -70,9 +81,30 @@ public class BuqueTest {
 	}
 	
 	@Test
-	void testCambiarFase() {
+	void testSetFase() {
 		assertEquals(stateInbound, buque.getFase());
-		buque.cambiarFase(buque);
-		assertEquals(stateArrived, buque.getFase());	
+		this.buque.setFase(stateArrived);
+		assertEquals(stateArrived, buque.getFase());
+	}
+
+	@Test
+	void testCambiarFaseCiclo() {
+		assertEquals(stateInbound, buque.getFase());
+		this.buque.cambiarFase();
+		assertEquals(stateArrived, buque.getFase());
+		this.buque.cambiarFase();
+		assertEquals(stateWorking, buque.getFase());
+		this.buque.cambiarFase();
+		assertEquals(stateDeparting, buque.getFase());
+		this.buque.cambiarFase();
+		assertEquals(stateOutbound, buque.getFase());
+		this.buque.cambiarFase();
+		assertEquals(stateInbound, buque.getFase());
+	}
+	@Test
+	void enviarEmailTest() {
+		when(viaje.getOrden()).thenReturn(orden);
+		buque.enviarEmailA(terminal);
+		verify(viaje).getOrden();
 	}
 }

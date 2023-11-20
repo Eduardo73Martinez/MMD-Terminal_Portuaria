@@ -13,14 +13,19 @@ public class Viaje {
 	private CircuitoMaritimo recorrido;
 	private Buque buque;
 	private List<Tramo> tramos;
+	private OrdenBasicaTP   orden;
 	// suponemos que el viaje un recorrido de tramos de un circuito. Puede ser un
 	// circuito completo si lo desea.
 
-	public Viaje(LocalDate fechaDeSalida, List<Tramo> tramos, CircuitoMaritimo circuito, Buque buque) {
+	public Viaje(LocalDate fechaDeSalida, 
+			List<Tramo> tramos, 
+			CircuitoMaritimo circuito, 
+			Buque buque, OrdenBasicaTP orden) {
 		this.fechaDeSalida = fechaDeSalida;
 		this.tramos = tramos;
 		this.recorrido = circuito;
 		this.buque = buque;
+		this.orden = orden;
 		//this.validarViaje(tramos);
 	}
 
@@ -62,5 +67,9 @@ public class Viaje {
 	public double getCosto() {
 		return this.tramos.stream().mapToDouble(s -> s.getPrecio()).sum();
 	}
+	public OrdenBasicaTP getOrden() {
+		return this.orden;
+	}
+	
 
 }

@@ -42,15 +42,20 @@ public class Buque {
 		// TODO Auto-generated method stub
 		return this.fase;
 	}
-
-	public void cambiarFase(Buque b) {
+ 
+	public void cambiarFase() {
 		// TODO Auto-generated method stub
-		this.fase.siguiente(b);
+		this.setFase(this.fase.siguiente());
 	}
 
 	protected void setFase(BuqueState fase) {
 		// TODO Auto-generated method stub
 		this.fase = fase;
 	}
+
+	public void enviarEmailA(Terminal terminal) {
+		// TODO Auto-generated method stub
+		terminal.recibirEmail(new Email("Llegando" ,this.viaje.getOrden()));
+	} 
 
 }
