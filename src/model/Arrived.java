@@ -9,8 +9,14 @@ public class Arrived implements BuqueState {
 	}
 
 	@Override
-	public Working siguiente() {
+	public Working siguiente(Buque b) {
 //		this.faseSiguiente = (Working) fase;
 		return this.faseSiguiente;
+	}
+	
+	@Override
+	public boolean hayPosibilidadDeCambio(Buque buque) {
+		// TODO Auto-generated method stub
+		return buque.hayOrdenDeWorking();
 	}
 }
