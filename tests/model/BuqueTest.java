@@ -43,9 +43,9 @@ public class BuqueTest {
 
 		this.terminal1 		= mock(Terminal.class);
 		this.terminal2 		= mock(Terminal.class);
-		this.viaje			  = mock(Viaje.class);
-		this.gps			    = spy(new GPS(1, posicion1));
-    this.email 			  = mock(Email.class);
+		this.viaje			= mock(Viaje.class);
+		this.gps			= spy(new GPS(1, posicion1));
+		this.email 			= mock(Email.class);
 
 		this.stateOutbound  = spy(new Outbound());
 		this.stateDeparting	= spy(new Departing(stateOutbound));
@@ -62,7 +62,6 @@ public class BuqueTest {
 		this.cargas.add(carga3);
 
 		when(this.terminal1.getPosicion()).thenReturn(this.posicion1);
-
 		when(this.viaje.getProximaTerminal()).thenReturn(this.terminal1);
 
 		// SUT (System Under Test): objeto a testear
@@ -117,7 +116,7 @@ public class BuqueTest {
 	@Test
 	void enviarEmailTest() {
 		when(viaje.getOrden()).thenReturn(orden);
-		buque.enviarEmailA(terminal);
+		buque.enviarEmailA(terminal1);
 		verify(viaje).getOrden();
 	}
 }
