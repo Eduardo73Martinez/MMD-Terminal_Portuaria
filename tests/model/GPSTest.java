@@ -14,8 +14,8 @@ public class GPSTest {
 	private Posicion		posicion2 = new Posicion(2, 5);
 	
 	private Terminal		terminal;
-	private float			timer1; //FIXME
-	private float			timer2; //FIXME
+	private long			timer1; //FIXME
+	private long			timer2; //FIXME
 	
 	@BeforeEach
 	public void setUp() {
@@ -42,8 +42,8 @@ public class GPSTest {
 	@Test
 	public void testSetTimer() {
 		this.timer2 = this.timer1 + 1;
-		assertEquals(this.timer1, this.gps.getTimer());
-		this.gps.setTimer(this.timer2);
-		assertEquals(this.timer2, this.gps.getTimer());
+		assertEquals(this.timer1, this.gps.getPeriodo());
+		this.gps.setPeriodo(timer2);
+		assertEquals(this.timer2, this.gps.getPeriodo());
 	}
 }
