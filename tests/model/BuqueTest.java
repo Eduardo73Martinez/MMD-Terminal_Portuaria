@@ -33,15 +33,19 @@ public class BuqueTest {
 	private Carga			carga1;
 	private Carga			carga2;
 	private Carga			carga3;
+	private Email 			email;
+	private OrdenBasicaTP 	orden = mock(OrdenBasicaTP.class);
 	
 	
 	@BeforeEach
 	public void setUp() {
 		// DOC (Depended-On-Component): nuestros doubles
+
 		this.terminal1 		= mock(Terminal.class);
 		this.terminal2 		= mock(Terminal.class);
-		this.viaje			= spy(Viaje.class);
-		this.gps			= spy(new GPS(1, posicion1));
+		this.viaje			  = mock(Viaje.class);
+		this.gps			    = spy(new GPS(1, posicion1));
+    this.email 			  = mock(Email.class);
 
 		this.stateOutbound  = spy(new Outbound());
 		this.stateDeparting	= spy(new Departing(stateOutbound));
@@ -88,13 +92,9 @@ public class BuqueTest {
 		assertEquals(distanciaEsperada, this.buque.distanciaA(this.terminal1));
 	}
 	
-
 	@Test
 	void testCambiarFaseCiclo() throws InterruptedException {
 		assertEquals(stateInbound, buque.getFase());
-//		this.gps.activar();
-//		when(this.gps.getPosicion()).thenReturn(this.posicion2);
-//		assertEquals(this.posicion2, this.gps.getPosicion());
 		// Cambiar posicion del buque
 		this.buque.update();
 		assertEquals(stateArrived, buque.getFase());
@@ -112,5 +112,12 @@ public class BuqueTest {
 		when(this.terminal1.getPosicion()).thenReturn(this.posicion3);
 		this.buque.update();
 		assertEquals(stateInbound, buque.getFase());
+	}
+
+	@Test
+	void enviarEmailTest() {
+		when(viaje.getOrden()).thenReturn(orden);
+		buque.enviarEmailA(terminal);
+		verify(viaje).getOrden();
 	}
 }

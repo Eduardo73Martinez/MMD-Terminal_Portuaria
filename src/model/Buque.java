@@ -100,5 +100,8 @@ public class Buque {
 		return true;
 	}
 
-
+	public void enviarEmailA(Terminal terminal) {
+		// TODO Auto-generated method stub
+		terminal.recibirEmail(new Email("Llegando" ,this.viaje.getOrden()));
+	} 
 }

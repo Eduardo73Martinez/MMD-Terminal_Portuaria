@@ -13,7 +13,7 @@ public class GPSTest {
 	
 	private Posicion		posicion1 = new Posicion(2, 3);
 	private Posicion		posicion2 = new Posicion(2, 5);
-	
+
 	private Buque			buque;
 	private Outbound		stateOutbound;
 	private Inbound			stateInbound;
@@ -30,7 +30,7 @@ public class GPSTest {
 	public void setUp() {
 		// DOC (Depended-On-Component): nuestros doubles
 		this.time1 = 2;
-
+  
 		this.stateOutbound  = spy(new Outbound());
 		this.stateDeparting	= spy(new Departing(stateOutbound));
 		this.stateWorking	= spy(new Working(stateDeparting));

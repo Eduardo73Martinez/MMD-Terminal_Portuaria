@@ -15,6 +15,10 @@ public class Inbound implements BuqueState {
 		return this.faseSiguiente;
 	}
 
+	public Inbound(Arrived fase) {
+		this.faseSiguiente = fase;
+	}
+
 	@Override
 	public boolean hayPosibilidadDeCambio(Buque buque) {
 		// TODO Auto-generated method stub
