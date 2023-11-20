@@ -53,7 +53,12 @@ public class GPS extends TimerTask {
 		if (this.reportar) {
 			this.buque.update(); // ¿hay que cambiar de fase?
 		}
-	} 
+	}
+
+	public void setBuque(Buque b) {
+		this.buque	  = b;
+		this.reportar = true;
+	}
 
 	@Override
 	public void run() {
