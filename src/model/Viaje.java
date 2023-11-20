@@ -21,7 +21,7 @@ public class Viaje {
 		this.tramos = tramos;
 		this.recorrido = circuito;
 		this.buque = buque;
-		this.validarViaje(tramos);
+		//this.validarViaje(tramos);
 	}
 
 	public LocalDate getFechaDeSalida() {
@@ -35,25 +35,25 @@ public class Viaje {
 		return this.fechaDeSalida.plusDays(diasDeViaje);
 	}
 
-	public Terminal getTerminalDestino() throws ArrayIndexOutOfBoundsException {
+	public Terminal getTerminalDestino() throws IndexOutOfBoundsException {
 		// TODO Auto-generated method stub
 		try {
 			return this.tramos.get(tramos.size() - 1).getOrigen();
-		} catch (ArrayIndexOutOfBoundsException e) {
-			throw new ArrayIndexOutOfBoundsException("No hay terminal destino en el viaje");
+		} catch (IndexOutOfBoundsException e) {
+			throw new IndexOutOfBoundsException("No hay terminal destino en el viaje");
 		}
 	}
 
-	public Terminal getTerminalOrigen() throws ArrayIndexOutOfBoundsException {
+	public Terminal getTerminalOrigen() throws IndexOutOfBoundsException {
 		// TODO Auto-generated method stub
 		try {
 			return this.tramos.get(0).getOrigen();
-		} catch (ArrayIndexOutOfBoundsException e) {
-			throw new ArrayIndexOutOfBoundsException("No hay terminal origen en el viaje");
-		}
+		} catch (IndexOutOfBoundsException e) {
+			throw new IndexOutOfBoundsException("No hay terminal origen en el viaje");
+		} 
 	}
 
-	public void validarViaje(List<Tramo> tramos) {
+	public void validarViaje(List<Tramo> tramos) throws TramoExceptions {
 		if (!this.recorrido.getTramos().containsAll(tramos)) {
 			throw new TramoExceptions("El viaje completo no está en el circuito dado");
 		}

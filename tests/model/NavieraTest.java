@@ -59,7 +59,7 @@ class NavieraTest {
 	
 	
 	@BeforeEach
-	void setUp() throws Exception {
+	void setUp() throws Exception {  
 		viaje1 = mock(Viaje.class);
 		viaje2 =  mock(Viaje.class);
 		viaje3 =  mock(Viaje.class);
