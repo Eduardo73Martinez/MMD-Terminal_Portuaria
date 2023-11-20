@@ -23,7 +23,7 @@ public class GPS extends TimerTask {
 		// TODO Auto-generated constructor stub
 		this.periodo = periodo;
 		this.posicion = posicion;
-		this.cronometro.schedule(this, 0, this.getPeriodo());
+//		this.cronometro.schedule(this, 0, this.getPeriodo());
 	}
 
 	public GPS(long periodo, Buque buque) {
@@ -32,10 +32,12 @@ public class GPS extends TimerTask {
 		this.buque	  = buque;
 		this.reportar = true;
 		this.posicion = buque.getPosicion();
-		this.cronometro.schedule(this, 0, this.getPeriodo());
 	}
 
-
+	public void activar() {
+		this.cronometro.schedule(this, 0, this.getPeriodo());
+	}
+	
 	public Posicion getPosicion() {
 		return this.posicion;
 	}

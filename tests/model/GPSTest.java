@@ -28,7 +28,7 @@ public class GPSTest {
 	@BeforeEach
 	public void setUp() {
 		// DOC (Depended-On-Component): nuestros doubles
-		this.time1 = 200000;
+		this.time1 = 2;
 
 		this.stateOutbound  = spy(new Outbound());
 		this.stateDeparting	= spy(new Departing(stateOutbound));
@@ -52,12 +52,16 @@ public class GPSTest {
 
 	@Test
 	public void testGetPosicion() {
-		this.gps.cancel();
 		assertEquals(this.posicion1, this.gps.getPosicion());
-//		this.gps.wait(2); // FIXME acá tiene que dejar pasar X tiempo
-//		assertNotEquals(posicion1, this.gps.getPosicion());
 	}
-	
+
+	@Test
+	public void testActivar() {
+		this.gps.activar();
+//		wait(this.time1); // Esperar para que cambie
+		assertNotEquals(this.posicion1, this.gps.getPosicion());
+	}
+
 	@Test
 	public void testSetTimer() {
 		this.time2 = this.time1 + 1;
