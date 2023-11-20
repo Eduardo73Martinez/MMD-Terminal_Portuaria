@@ -56,8 +56,9 @@ public class GPSTest {
 	}
 
 	@Test
-	public void testActivar() {
+	public void testActivar() throws InterruptedException {
 		this.gps.activar();
+		Thread.sleep(time1);
 //		wait(this.time1); // Esperar para que cambie
 		assertNotEquals(this.posicion1, this.gps.getPosicion());
 	}
