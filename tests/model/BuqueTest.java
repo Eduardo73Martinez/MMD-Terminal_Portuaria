@@ -37,24 +37,28 @@ public class BuqueTest {
 	public void setUp() {
 		// DOC (Depended-On-Component): nuestros doubles
 		this.terminal 		= mock(Terminal.class);
-		this.gps			= mock(GPS.class);
-		this.stateOutbound	= spy(new Outbound());
+		this.viaje			= spy(Viaje.class);
+		this.gps			= spy(new GPS(10000, posicion1));
+
+		this.stateOutbound  = spy(new Outbound());
 		this.stateDeparting	= spy(new Departing(stateOutbound));
 		this.stateWorking	= spy(new Working(stateDeparting));
 		this.stateArrived	= spy(new Arrived(stateWorking));
 		this.stateInbound	= spy(new Inbound(stateArrived));
 		this.stateOutbound.setSiguiente(stateInbound);
+
 		this.carga1 		= mock(Carga.class);
 		this.carga2 		= mock(Carga.class);
 		this.carga3 		= mock(Carga.class);
-		
 		this.cargas.add(carga1);
 		this.cargas.add(carga2);
 		this.cargas.add(carga3);
-		when(this.gps.getPosicion()).thenReturn(posicion1);
+
+		when(this.terminal.getPosicion()).thenReturn(this.posicion2);
+		when(this.viaje.getProximaTerminal()).thenReturn(this.terminal);
 
 		// SUT (System Under Test): objeto a testear
-		this.buque = new Buque(stateInbound, gps, viaje);
+		this.buque = new Buque(stateInbound, viaje, gps);
 	}
 
 	@Test
@@ -72,29 +76,27 @@ public class BuqueTest {
 	@Test
 	public void testDistanciaA() {
 		when(this.terminal.getPosicion()).thenReturn(posicion2);
-		float distanciaEsperada = 2;
+		// Posible solucion a las posiciones random del buque.
+		Posicion posicionBuque = this.buque.getPosicion();
+		Posicion posicionTerminal = this.terminal.getPosicion();
+		float distanciaEsperada = (float) Math.hypot( (posicionBuque.getLatitud() - posicionTerminal.getLatitud())
+				 , (posicionBuque.getLongitud() - posicionTerminal.getLongitud()) );
 		assertEquals(distanciaEsperada, this.buque.distanciaA(this.terminal));
 	}
 	
-	@Test
-	void testSetFase() {
-		assertEquals(stateInbound, buque.getFase());
-		this.buque.setFase(stateArrived);
-		assertEquals(stateArrived, buque.getFase());
-	}
 
 	@Test
 	void testCambiarFaseCiclo() {
 		assertEquals(stateInbound, buque.getFase());
-		this.buque.cambiarFase();
+		// Cambiar posicion del buque
 		assertEquals(stateArrived, buque.getFase());
-		this.buque.cambiarFase();
+		// Cambiar posicion del buque
 		assertEquals(stateWorking, buque.getFase());
-		this.buque.cambiarFase();
+		// Cambiar posicion del buque
 		assertEquals(stateDeparting, buque.getFase());
-		this.buque.cambiarFase();
+		// Cambiar posicion del buque
 		assertEquals(stateOutbound, buque.getFase());
-		this.buque.cambiarFase();
+		// Cambiar posicion del buque
 		assertEquals(stateInbound, buque.getFase());
 	}
 }
