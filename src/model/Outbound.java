@@ -20,6 +20,7 @@ public class Outbound implements BuqueState {
 	@Override
 	public boolean hayPosibilidadDeCambio(Buque buque) {
 		// TODO Auto-generated method stub
-		return (this.kmANuevaTerminal < buque.kmsProximaTerminal());
+		return (buque.kmsProximaTerminal() != 0 &&
+				buque.kmsProximaTerminal() > this.kmANuevaTerminal);
 	}
 }

@@ -25,8 +25,10 @@ public class BuqueTest {
 	private GPS				gps;
 	private Viaje			viaje;
 
-	private Terminal		terminal;
-	private Posicion		posicion2 = new Posicion(2, 5);
+	private Terminal		terminal1;
+	private Terminal		terminal2;
+	private Posicion		posicion2 = new Posicion(2, 4);
+	private Posicion		posicion3 = new Posicion(2, 60);
 	
 	private Carga			carga1;
 	private Carga			carga2;
@@ -36,7 +38,8 @@ public class BuqueTest {
 	@BeforeEach
 	public void setUp() {
 		// DOC (Depended-On-Component): nuestros doubles
-		this.terminal 		= mock(Terminal.class);
+		this.terminal1 		= mock(Terminal.class);
+		this.terminal2 		= mock(Terminal.class);
 		this.viaje			= spy(Viaje.class);
 		this.gps			= spy(new GPS(1, posicion1));
 
@@ -54,8 +57,9 @@ public class BuqueTest {
 		this.cargas.add(carga2);
 		this.cargas.add(carga3);
 
-		when(this.terminal.getPosicion()).thenReturn(this.posicion2);
-		when(this.viaje.getProximaTerminal()).thenReturn(this.terminal);
+		when(this.terminal1.getPosicion()).thenReturn(this.posicion1);
+
+		when(this.viaje.getProximaTerminal()).thenReturn(this.terminal1);
 
 		// SUT (System Under Test): objeto a testear
 		this.buque = new Buque(stateInbound, viaje, gps);
@@ -68,20 +72,20 @@ public class BuqueTest {
 
 	@Test
 	public void testPreavisoA() {
-		assertFalse(this.terminal.hayBuqueCerca());
-		this.buque.preavisoA(this.terminal);
-		assertTrue(this.terminal.hayBuqueCerca());
+		assertFalse(this.terminal1.hayBuqueCerca());
+		this.buque.preavisoA(this.terminal1);
+		assertTrue(this.terminal1.hayBuqueCerca());
 	}
 
 	@Test
 	public void testDistanciaA() {
-		when(this.terminal.getPosicion()).thenReturn(posicion2);
+		when(this.terminal1.getPosicion()).thenReturn(posicion2);
 		// Posible solucion a las posiciones random del buque.
 		Posicion posicionBuque = this.buque.getPosicion();
-		Posicion posicionTerminal = this.terminal.getPosicion();
+		Posicion posicionTerminal = this.terminal1.getPosicion();
 		float distanciaEsperada = (float) Math.hypot( (posicionBuque.getLatitud() - posicionTerminal.getLatitud())
 				 , (posicionBuque.getLongitud() - posicionTerminal.getLongitud()) );
-		assertEquals(distanciaEsperada, this.buque.distanciaA(this.terminal));
+		assertEquals(distanciaEsperada, this.buque.distanciaA(this.terminal1));
 	}
 	
 
@@ -101,9 +105,11 @@ public class BuqueTest {
 		this.buque.update();
 		assertEquals(stateDeparting, buque.getFase());
 		// Cambiar posicion del buque
+		when(this.terminal1.getPosicion()).thenReturn(this.posicion2);
 		this.buque.update();
 		assertEquals(stateOutbound, buque.getFase());
 		// Cambiar posicion del buque
+		when(this.terminal1.getPosicion()).thenReturn(this.posicion3);
 		this.buque.update();
 		assertEquals(stateInbound, buque.getFase());
 	}

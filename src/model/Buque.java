@@ -87,7 +87,7 @@ public class Buque {
 
 	public float kmsProximaTerminal() {
 		// TODO Auto-generated method stub
-		return 0;
+		return this.distanciaA(this.viaje.getProximaTerminal());
 	}
 
 	public boolean hayOrdenDeDepart() {
