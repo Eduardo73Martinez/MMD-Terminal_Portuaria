@@ -143,6 +143,7 @@ class ViajeTest {
 		assertThrows(IndexOutOfBoundsException.class, () -> {
 			viaje.getTramo(4);
 		});
+		assertEquals(t1, viaje.getTramo(0));
 	}
 
 	@Test 
