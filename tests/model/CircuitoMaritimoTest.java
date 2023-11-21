@@ -100,12 +100,12 @@ class CircuitoMaritimoTest {
 		
 		circuito.validarTramoNuevo( tramoNavegacion3 ) ; 
 		
-		assertEquals(circuito.getTramos().size(),3);
+		assertEquals(2, circuito.getTramos().size());
 	}
 	@Test
 	void getTiempoTotalDelRecorridoTest() {
-		when(tramoNavegacion1.getTiempo()).thenReturn(300.0);
-		when(tramoNavegacion2.getTiempo()).thenReturn(500.0);
+		when(tramoNavegacion1.getTiempo()).thenReturn(20);
+		when(tramoNavegacion2.getTiempo()).thenReturn(10);
 		
 		circuito.tiempoTotalDelCircuito();
 		
@@ -139,20 +139,24 @@ class CircuitoMaritimoTest {
 		
 		verify(tramoNavegacion1).getPrecio();
 		verify(tramoNavegacion2).getPrecio();
-	}
+	} 
 	@Test
 	void precioTotalEntreTerminalesTest()  {
+		//Terminales
+		when(tramoNavegacion1.getOrigen()).thenReturn(teminalOrigen1);
+		when(tramoNavegacion2.getOrigen()).thenReturn(teminalOrigen2);
+		when(tramoNavegacion3.getOrigen()).thenReturn(teminalDestino1);
 		// tramo anterior 
 		when(tramoNavegacion1.getPrecio()).thenReturn(300.0);
 		when(tramoNavegacion2.getPrecio()).thenReturn(400.0);
 		when(tramoNavegacion3.getPrecio()).thenReturn(1000.0);
 				
 		//
-		circuito.precioTotalEntre(teminalOrigen1, teminalDestino1);
+		circuito.precioTotalEntre(teminalOrigen1, teminalOrigen2);
 		
 		verify(tramoNavegacion1).getPrecio();
 		verify(tramoNavegacion2).getPrecio();
-		verify(tramoNavegacion3).getPrecio();
+		verify(tramoNavegacion3, never()).getPrecio();
 	}
 	@Test
 	void validacionDeExistenciaDeTerminalesEnElCircuitoTest()  {
@@ -217,6 +221,32 @@ class CircuitoMaritimoTest {
 				);
 		when(tramoNavegacion2.getOrigen()).thenReturn(teminalOrigen2);
 		assertDoesNotThrow(()->{circuito.validarOrigenesDiferentes(tramoNavegacion2,tramoNavegacion1);});
+	}
+	@Test
+	void tiempoTotalEntreTerminalesTest()  {
+		//Terminales de los tramos
+		when(tramoNavegacion1.getOrigen()).thenReturn(teminalOrigen1);
+		when(tramoNavegacion2.getOrigen()).thenReturn(teminalOrigen2);
+		when(tramoNavegacion3.getOrigen()).thenReturn(teminalDestino1);
+		// tramo anterior 
+		when(tramoNavegacion1.getTiempo()).thenReturn(50);
+		when(tramoNavegacion2.getTiempo()).thenReturn(10);
+		when(tramoNavegacion3.getTiempo()).thenReturn(20);
+				
+		//
+		circuito.tiempoTotalEntre(teminalOrigen1, teminalOrigen2);
+		
+		verify(tramoNavegacion1).getTiempo();
+		verify(tramoNavegacion2).getTiempo();
+		verify(tramoNavegacion3, never()).getTiempo();
+	}
+	@Test
+	void nroTotalEntreTerminalesTest()  {
+		//Terminales de los tramos
+		when(tramoNavegacion1.getOrigen()).thenReturn(teminalOrigen1);
+		when(tramoNavegacion2.getOrigen()).thenReturn(teminalOrigen2);
+
+		assertEquals(2, circuito.nroTerminalesTotalEntre(teminalOrigen1, teminalOrigen2));
 	}
 
 }
