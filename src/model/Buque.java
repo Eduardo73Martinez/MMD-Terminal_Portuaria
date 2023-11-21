@@ -29,7 +29,7 @@ public class Buque {
 
 	public void preavisoA(Terminal terminal) {
 		// TODO Auto-generated method stub
-		terminal.recibirPreavisoPor(this);
+		terminal.recibirPreaviso(this);
 	}
 
 	public float distanciaA(Terminal terminal) {
@@ -81,13 +81,17 @@ public class Buque {
 		// TODO Auto-generated method stub
 		if (this.fase.hayPosibilidadDeCambio(this)) {
 			this.cambiarFase();
-			this.tramoActual++;
 		}
 	}
 
 	public float kmsProximaTerminal() {
 		// TODO Auto-generated method stub
-		return this.distanciaA(this.viaje.getProximaTerminal());
+		return this.distanciaA(this.getProximaTerminal());
+	}
+
+	private Terminal getProximaTerminal() {
+		// TODO Auto-generated method stub
+		return this.viaje.getTramo(this.tramoActual).getDestino();
 	}
 
 	public boolean hayOrdenDeDepart() {
@@ -103,5 +107,13 @@ public class Buque {
 	public void enviarEmailA(Terminal terminal) {
 		// TODO Auto-generated method stub
 		terminal.recibirEmail(new Email("Llegando" ,this.viaje.getOrden()));
-	} 
+	}
+
+	public void avisarPartida(Departing departing) {
+		// TODO Auto-generated method stub
+		if (!this.viaje.getTerminalDestino().equals(this.getProximaTerminal())) {
+			this.tramoActual++;	
+		}
+	}
+
 }
