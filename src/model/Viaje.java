@@ -72,9 +72,9 @@ public class Viaje {
 	}
 	
 
-	public Terminal getProximaTerminal() {
+	public Tramo getTramo(int idxTramo) throws IndexOutOfBoundsException {
 		// TODO Auto-generated method stub
-		return null;
+		return this.tramos.get(idxTramo);
 	}
 
 }

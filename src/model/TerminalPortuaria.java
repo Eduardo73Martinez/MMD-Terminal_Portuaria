@@ -32,135 +32,142 @@ public class TerminalPortuaria implements Terminal {
 		return this.posicion;
 	}
 
-	void recibirPreaviso(Buque buque) { //es package para testear
+	@Override
+	public void recibirPreaviso(Buque buque) { //es package para testear
 		this.buqueCerca = true; //Revisar si falta comportamiento
 	}
 	
-	Boolean getBuqueCerca() { //es package para testear
+	@Override
+	public void recibirEmail(Email email) {
+		
+	}
+
+	public Boolean getBuqueCerca() { //es package para testear
 		// TODO Auto-generated method stub
 		return buqueCerca;
 	}
 	
-	List<Camion> getCamionesRegistrados() { //sigue el orden CRUD (create está en atributos) //es package para testear
+	private List<Camion> getCamionesRegistrados() { //sigue el orden CRUD (create está en atributos) //es package para testear
 		return this.camionesRegistrados;
 	}
 	
-	void registrarCamion(Camion camion) { //es package para testear
+	private void registrarCamion(Camion camion) { //es package para testear
 		this.camionesRegistrados.add(camion);
 	}
 	
-	void quitarCamion(Camion camion) { // es package para testear
+	private void quitarCamion(Camion camion) { // es package para testear
 		this.camionesRegistrados.remove(camion);
 	}
-	List<Chofer> getChoferesRegistrados() { //sigue el orden CRUD (create está en atributos) // es package para testear
+	
+	private List<Chofer> getChoferesRegistrados() { //sigue el orden CRUD (create está en atributos) // es package para testear
 		return this.choferesRegistrados;
 	}
 	
-	void registrarChofer(Chofer chofer) { // es package para testear
+	private void registrarChofer(Chofer chofer) { // es package para testear
 		this.choferesRegistrados.add(chofer);
 	}
 	
-	void quitarChofer(Chofer chofer) { // es package para testear
+	private void quitarChofer(Chofer chofer) { // es package para testear
 		this.choferesRegistrados.remove(chofer);
 	}	
 	
-	List<EmpresaTransporte> getEmpresasRegistradas() { //sigue el orden CRUD (create está en atributos) // es package para testear
+	private List<EmpresaTransporte> getEmpresasRegistradas() { //sigue el orden CRUD (create está en atributos) // es package para testear
 		return this.empresasRegistradas;
 	}
 	
-	void registrarEmpresa(EmpresaTransporte empresa) { //es package para testear
+	private void registrarEmpresa(EmpresaTransporte empresa) { //es package para testear
 		this.empresasRegistradas.add(empresa);
 	}
 	
-	void quitarEmpresa(EmpresaTransporte empresa) { //es package para testear
+	private void quitarEmpresa(EmpresaTransporte empresa) { //es package para testear
 		this.empresasRegistradas.remove(empresa);
 	}
 	
-	List<Consignee> getConsignee() { //sigue el orden CRUD (create está en atributos) // es package para testear
+	private List<Consignee> getConsignee() { //sigue el orden CRUD (create está en atributos) // es package para testear
 		return this.consignees;
 	}
 	
-	void registrarConsignee(Consignee consignee) { // es package para testear
+	private void registrarConsignee(Consignee consignee) { // es package para testear
 		this.consignees.add(consignee);
 	}
 	
-	void quitarConsignee(Consignee consignee) { // es package para testear
+	private void quitarConsignee(Consignee consignee) { // es package para testear
 		this.consignees.remove(consignee);
 	}
 	
-	List<Shipper> getShippers() { //sigue el orden CRUD (create está en atributos) // es package para testear
+	private List<Shipper> getShippers() { //sigue el orden CRUD (create está en atributos) // es package para testear
 		return this.shippers;
 	}
 	
-	void registrarShipper(Shipper shipper) { // es package para testear
+	private void registrarShipper(Shipper shipper) { // es package para testear
 		this.shippers.add(shipper);
 	}
 	
-	void quitarShipper(Shipper shipper) { // es package para testear
+	private void quitarShipper(Shipper shipper) { // es package para testear
 		this.shippers.remove(shipper);
 	}
 	
-	List<CircuitoMaritimo> getCircuitos() { //sigue el orden CRUD (create está en atributos) // es package para testear
+	private List<CircuitoMaritimo> getCircuitos() { //sigue el orden CRUD (create está en atributos) // es package para testear
 		return this.circuitos;
 	}
 	
-	void registrarCircuito(CircuitoMaritimo circuito) { // es package para testear
+	private void registrarCircuito(CircuitoMaritimo circuito) { // es package para testear
 		this.circuitos.add(circuito);
 	}
 	
-	void quitarCircuito(CircuitoMaritimo circuito) { // es package para testear
+	private void quitarCircuito(CircuitoMaritimo circuito) { // es package para testear
 		this.circuitos.remove(circuito);
 	}
 	
-	List<Naviera> getNavieras() { //sigue el orden CRUD (create está en atributos) // es package para testear
+	private List<Naviera> getNavieras() { //sigue el orden CRUD (create está en atributos) // es package para testear
 		return this.navieras;
 	}
 	
-	void registrarNaviera(Naviera naviera) { // es package para testear
+	private void registrarNaviera(Naviera naviera) { // es package para testear
 		this.navieras.add(naviera);
 	}
 	
-	void quitarNaviera(Naviera naviera) { // es package para testear
+	private void quitarNaviera(Naviera naviera) { // es package para testear
 		this.navieras.remove(naviera);
 	}
 	
 
-	void envio(Shipper shipper, Carga carga, Viaje viaje, Camion camion, Chofer chofer) { //es package para testear
+	public void envio(Shipper shipper, Carga carga, Viaje viaje, Camion camion, Chofer chofer) { //es package para testear
 		// TODO Auto-generated method stub
 		
 	}
 
-	 void recepcion(Consignee consignee, Carga carga, Viaje viaje, Camion camion, Chofer chofer) { //es package para testear
+	public void recepcion(Consignee consignee, Carga carga, Viaje viaje, Camion camion, Chofer chofer) { //es package para testear
 		// TODO Auto-generated method stub
 		
 	}
 
-	void asignarTurno(ICliente cliente) { //es package para testear
+	private void asignarTurno(ICliente cliente) { //es package para testear
 		// TODO Auto-generated method stub
 		
 	}
 
-	List<Viaje> filtrar() { // es package para testear
+	public List<Viaje> filtrar() { // es package para testear
 		// TODO Auto-generated method stub
 		return null;
 		
 	}
 
-	CircuitoMaritimo elMejorCircuito(Terminal terminal) { //también se podría pasar la prioridad como parámetro
+	public CircuitoMaritimo elMejorCircuito(Terminal terminal) { //también se podría pasar la prioridad como parámetro
 		// TODO Auto-generated method stub
 		return prioridad.elMejor(this.circuitos, this, terminal);
 	}
 
-	void setPrioridad(IOrden prioridad) {
+	public void setPrioridad(IOrden prioridad) {
 		// TODO Auto-generated method stub
 		this.prioridad = prioridad;
 	}
 	
-	IOrden getPrioridad() {
+	public IOrden getPrioridad() {
 		return this.prioridad;
 	}
 	
-	void validarTransporteCarga(OrdenBasicaTP orden) { //manejar esta lógica con bool?
+	private void validarTransporteCarga(OrdenBasicaTP orden) { //manejar esta lógica con bool?
 		// TODO Auto-generated method stub
 //		Camion camion = orden.getCamion(); //falta modificar Orden
 //		Chofer chofer = orden.getChofer(); //falta modificar Orden
@@ -168,12 +175,12 @@ public class TerminalPortuaria implements Terminal {
 //		this.validarCamionYChofer(camion, chofer); 
 	}
 
-	void validarTurno(Camion camion) {
+	private void validarTurno(Camion camion) {
 		// TODO Auto-generated method stub
 		// si el turno queda en la orden, depende del modelado de la misma		
 	}
 
-	void validarCamionYChofer(Camion camion, Chofer chofer) {
+	private void validarCamionYChofer(Camion camion, Chofer chofer) {
 		// TODO Auto-generated method stub
 		if (this.camionesRegistrados.contains(camion)) {
 			// no sé qué se debería hacer si pasa la validación
@@ -191,14 +198,14 @@ public class TerminalPortuaria implements Terminal {
 		return 0;
 	}
 
-	boolean hayCircuitoCon(Terminal terminal) {
+	private boolean hayCircuitoCon(Terminal terminal) {
 		// TODO Auto-generated method stub
 //		return (no sé cómo armar la expresión de consultarle a los tramos de un circuito por las terminales,
 //				sería un recorrido por la lista de tramos de cada circuito). 
 		return false;
 	}
 
-	LocalDate proximaPartidaHasta(Terminal terminal) {
+	public LocalDate proximaPartidaHasta(Terminal terminal) {
 		// TODO Auto-generated method stub
 //		if (this.hayPartidasA(terminal)) { //polimorfismo?
 //			return //ver manejo de colecciones de viajes/circuitos
@@ -206,19 +213,19 @@ public class TerminalPortuaria implements Terminal {
 		return null;
 	}
 
-	boolean hayPartidasA(Terminal terminal) {
+	public boolean hayPartidasA(Terminal terminal) {
 		// TODO Auto-generated method stub
 		// ver manejo de colecciones de viajes/circuitos
 		return false;
 	}
 
-	void contratar(ServicioContratable servicio, OrdenBasicaTP orden) {
+	public void contratar(ServicioContratable servicio, OrdenBasicaTP orden) {
 		// TODO Auto-generated method stub
 		// no tengo claro cuál sería el comportamiento de contratar un servicio
 		
 	}
 
-	List<Viaje> cronogramaSalidaViajes() {
+	public List<Viaje> cronogramaSalidaViajes() {
 		// TODO Auto-generated method stub
 		//return Naviera.getViajes(); //la naviera le deberia pasar los viajes
 		return null;
