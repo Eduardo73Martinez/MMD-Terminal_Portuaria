@@ -30,14 +30,16 @@ class FacturaTest {
 	private Date fechaFactura = new Date();
 	private OrdenExportacion ordenExportacion;
 	private OrdenImportacion ordenImportacion;
+	private Viaje viaje;
 	
 	@BeforeEach
 	void setUp() throws Exception {
+		viaje = mock(Viaje.class);
 		ordenExportacion = mock(OrdenExportacion.class);
 		ordenImportacion = mock(OrdenImportacion.class);
 		cliente = "Nombre cliente";
-		factura = new Factura(fechaFactura, cliente, ordenImportacion);
-		factura2 = new Factura(fechaFactura, cliente, ordenExportacion);
+		factura = new Factura(fechaFactura, cliente, ordenImportacion, viaje);
+		factura2 = new Factura(fechaFactura, cliente, ordenExportacion, viaje);
 	}
 
 	@Test

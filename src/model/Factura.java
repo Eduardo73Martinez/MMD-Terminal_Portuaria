@@ -10,12 +10,14 @@ public class Factura {
 	private Date fecha;
 	private String cliente;
 	private OrdenBasicaTP orden;
+	private Viaje viaje;
 
-	public Factura(Date fecha, String cliente, OrdenBasicaTP orden) {
+	public Factura(Date fecha, String cliente, OrdenBasicaTP orden, Viaje viaje) {
 		super();
 		this.fecha = fecha;
 		this.cliente = cliente;
 		this.orden = orden;
+		this.viaje = viaje;
 	}
 
 	public Date getFecha() {
@@ -30,9 +32,9 @@ public class Factura {
 		return orden;
 	}
 
-	public void getMontoTotal() {
+	public double getMontoTotal() {
 		// TODO Auto-generated method stub
-		this.orden.getMontoTotal();
+		return this.orden.getMontoTotal() + this.viaje.getCosto();
 	}
 
 }
