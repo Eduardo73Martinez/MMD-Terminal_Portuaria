@@ -13,20 +13,18 @@ public class Viaje {
 	private CircuitoMaritimo recorrido;
 	private Buque buque;
 	private List<Tramo> tramos;
-	private OrdenBasicaTP   orden;
+	private OrdenBasicaTP orden;
 	// suponemos que el viaje un recorrido de tramos de un circuito. Puede ser un
 	// circuito completo si lo desea.
 
-	public Viaje(LocalDate fechaDeSalida, 
-			List<Tramo> tramos, 
-			CircuitoMaritimo circuito, 
-			Buque buque, OrdenBasicaTP orden) {
+	public Viaje(LocalDate fechaDeSalida, List<Tramo> tramos, CircuitoMaritimo circuito, Buque buque,
+			OrdenBasicaTP orden) {
 		this.fechaDeSalida = fechaDeSalida;
 		this.tramos = tramos;
 		this.recorrido = circuito;
 		this.buque = buque;
 		this.orden = orden;
-		//this.validarViaje(tramos);
+		// this.validarViaje(tramos);
 	}
 
 	public LocalDate getFechaDeSalida() {
@@ -55,26 +53,33 @@ public class Viaje {
 			return this.tramos.get(0).getOrigen();
 		} catch (IndexOutOfBoundsException e) {
 			throw new IndexOutOfBoundsException("No hay terminal origen en el viaje");
-		} 
+		}
 	}
 
 	public void validarViaje(List<Tramo> tramos) throws TramoExceptions {
-		if (!this.recorrido.getTramos().containsAll(tramos)) {
+		if (! this.todosLosTramosPertencenAlCircuito(tramos)) {
 			throw new TramoExceptions("El viaje completo no está en el circuito dado");
 		}
+	}
+	public boolean todosLosTramosPertencenAlCircuito(List<Tramo> tramos) {
+		return this.recorrido.getTramos().containsAll(tramos);
 	}
 
 	public double getCosto() {
 		return this.tramos.stream().mapToDouble(s -> s.getPrecio()).sum();
 	}
+
 	public OrdenBasicaTP getOrden() {
 		return this.orden;
 	}
-	
 
 	public Tramo getTramo(int idxTramo) throws IndexOutOfBoundsException {
 		// TODO Auto-generated method stub
-		return this.tramos.get(idxTramo);
+		return this.getTramos().get(idxTramo);
+	}
+
+	public List<Tramo> getTramos() {
+		return this.tramos;
 	}
 
 }

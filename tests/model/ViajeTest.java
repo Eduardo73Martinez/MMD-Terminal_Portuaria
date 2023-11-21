@@ -23,16 +23,15 @@ class ViajeTest {
 	private Buque buque1;
 	private Viaje viaje;
 	private LocalDate fechaSalida = mock(LocalDate.class);;
-	private Tramo t1 = mock(Tramo.class); 
-	private Tramo t2= mock(Tramo.class); 
-	private Tramo t3 = mock(Tramo.class); 
+	private Tramo t1 = mock(Tramo.class);
+	private Tramo t2 = mock(Tramo.class);
+	private Tramo t3 = mock(Tramo.class);
 	private ArrayList<Tramo> tramos = new ArrayList<>();
-	private Terminal terminal1 = mock(Terminal.class); 
-	private Terminal terminal2= mock(Terminal.class); 
-	private Terminal terminal3 = mock(Terminal.class); 
+	private Terminal terminal1 = mock(Terminal.class);
+	private Terminal terminal2 = mock(Terminal.class);
+	private Terminal terminal3 = mock(Terminal.class);
 	private ArrayList<Tramo> tramos2 = new ArrayList<>();
 	private OrdenBasicaTP orden = mock(OrdenBasicaTP.class);
-	
 
 	@BeforeEach
 	void setUp() throws Exception {
@@ -44,18 +43,15 @@ class ViajeTest {
 		viaje = new Viaje(fechaSalida, tramos, circuito1, buque1, orden);
 	}
 
-	
 	@Test
 	void testViaje() {
 		assertEquals(viaje.getClass(), Viaje.class);
 	}
 
-
 	@Test
 	void testGetFechaDeSalida() {
 		assertEquals(fechaSalida, viaje.getFechaDeSalida());
 	}
-
 
 	@Test
 	void testGetFechaDeLlegada() {
@@ -115,6 +111,7 @@ class ViajeTest {
 		
 		assertThrows(TramoExceptions.class, ()->{viaje.validarViaje(tramos);});
 	}
+
 	@Test 
 	void getCostoTest() {
 		when(t1.getPrecio()).thenReturn(1000.0);
@@ -127,12 +124,32 @@ class ViajeTest {
 		verify(t2).getPrecio();
 		verify(t3).getPrecio();
 	}
-	@Test 
+
+	@Test
 	void getOrdenTest() {
-		
-		
+
 		assertEquals(orden, viaje.getOrden());
-		
+
+	}
+
+	@Test
+	void getTramosTest() {
+		assertEquals(tramos, viaje.getTramos());
+	}
+
+	@Test
+	void getIndexTramosTest() {
+
+		assertThrows(IndexOutOfBoundsException.class, () -> {
+			viaje.getTramo(4);
+		});
+		assertEquals(t1, viaje.getTramo(0));
+	}
+
+	@Test 
+	void todosLosTramosPertencenAlCircuitoTest() {
+		when(circuito1.getTramos()).thenReturn(tramos);
+		assertTrue(viaje.todosLosTramosPertencenAlCircuito(tramos));
 	}
 
 }

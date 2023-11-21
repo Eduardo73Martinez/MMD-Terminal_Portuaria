@@ -7,6 +7,7 @@ import static org.mockito.ArgumentMatchers.same;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 /**
@@ -17,9 +18,9 @@ public class CircuitoMaritimo {
 	private ArrayList<Tramo> tramos;
 
 	public CircuitoMaritimo(Tramo inicio, Tramo fin) {
-		//this.validarOrigenesDiferentes(inicio, fin);
-		//this.validarDireccionRecorrido(inicio, fin);
-		//this.validarDireccionRecorrido(fin, inicio);
+		// this.validarOrigenesDiferentes(inicio, fin);
+		// this.validarDireccionRecorrido(inicio, fin);
+		// this.validarDireccionRecorrido(fin, inicio);
 		this.tramos = new ArrayList<>();
 		this.tramos.add(inicio);
 		this.tramos.add(fin);
@@ -29,9 +30,9 @@ public class CircuitoMaritimo {
 	/**
 	 * Requerimentos minimos necesarios:
 	 * 
-	 * 1) el tramo anterior deben pertenecer a la coleccion de tramos.
-	 * 2) el tramoAnterior y tramoSiguiente dados son correlativos en el circuito
-	 * 3) el tramo nuevo tiene en su terminal de origen una terminal nueva.
+	 * 1) el tramo anterior deben pertenecer a la coleccion de tramos. 2) el
+	 * tramoAnterior y tramoSiguiente dados son correlativos en el circuito 3) el
+	 * tramo nuevo tiene en su terminal de origen una terminal nueva.
 	 */
 	public void agregarTramoLuegoDe(Tramo nuevoTramo, Tramo tramoAnterior) {
 
@@ -48,21 +49,21 @@ public class CircuitoMaritimo {
 		this.tramos.get(indiceTAnterior).setDestino(nuevoTramo.getOrigen());
 		this.tramos.add(indiceTAnterior + 1, nuevoTramo);
 
-	}  
+	}
 
 	public boolean esUltimoTramo(Tramo tramo) {
 		// TODO Auto-generated method stub
 		return this.tramos.get(this.tramos.size() - 1).equals(tramo);
 	}
 
-	public void validarDireccionRecorrido(Tramo tramo1, Tramo tramo2)  throws TramoExceptions{
+	public void validarDireccionRecorrido(Tramo tramo1, Tramo tramo2) throws TramoExceptions {
 		// TODO Auto-generated method stub
 		if (!tramo1.getDestino().equals(tramo2.getOrigen())) {
 			throw new TramoExceptions("El tramo1 no se dirige al tramo2 ");
 		}
 	}
 
-	public void validarOrigenesDiferentes(Tramo tramo1, Tramo tramo2) throws TramoExceptions{
+	public void validarOrigenesDiferentes(Tramo tramo1, Tramo tramo2) throws TramoExceptions {
 		// TODO Auto-generated method stub
 		if (tramo1.getOrigen().equals(tramo2.getOrigen())) {
 			throw new TramoExceptions("Los origenes de ambos terminales son iguales");
@@ -81,23 +82,23 @@ public class CircuitoMaritimo {
 
 	}
 
-	public void validarTramoNuevo(Tramo nuevoTramo)  throws TramoExceptions{
+	public void validarTramoNuevo(Tramo nuevoTramo) throws TramoExceptions {
 		if (this.tramos.contains(nuevoTramo)) {
 			throw new TramoExceptions("El tramo ya existe en el circuito ");
 		}
 	}
 
-	public void validarExistencia(Tramo tramo) throws TramoExceptions{
+	public void validarExistencia(Tramo tramo) throws TramoExceptions {
 		if (!this.tramos.contains(tramo)) {
 			throw new TramoExceptions("El tramo dado no existe en el circuito");
 		}
-	} 
+	}
 
-	public void validarTerminalEnCircuito(Terminal terminalAValidar)  throws TramoExceptions {
+	public void validarTerminalEnCircuito(Terminal terminalAValidar) throws TramoExceptions {
 		if (!this.perteneceAlCircuito(terminalAValidar)) {
 			throw new TramoExceptions("La terminal dada no pertenece al circuito");
 		}
-	} 
+	}
 
 	public boolean perteneceAlCircuito(Terminal terminal) {
 		return this.tramos.stream().anyMatch(s -> s.getOrigen() == terminal);
@@ -111,34 +112,42 @@ public class CircuitoMaritimo {
 		return this.tramos.stream().mapToDouble(s -> s.getPrecio()).sum();
 	}
 
-	public double precioTotalEntre(Terminal teminalOrigen, Terminal teminalDestino) {
-		Optional<Tramo> tramoOrigen =  this.tramos.stream()
-				.filter(t -> t.getOrigen().equals(teminalOrigen))
-				.findFirst(); 
-		this.validarTerminalEnCircuito(teminalOrigen);
-		this.validarTerminalEnCircuito(teminalDestino);
-		ArrayList<Tramo> tramosRecorridos;
-		// Tengo el tramo origen
-		// Recorro los siguientes tramos y acumulo precio
-		// Encuentro el tramo con el destino y corto
-		// Retorno el precio acumulado
-		return (Double) null; 
+	public double precioTotalEntre(Terminal teminalOrigen, Terminal teminalDestino)throws TramoExceptions {
+		ArrayList<Tramo> tramosRecorridos = this.tramosRecorridosEntre(teminalOrigen, teminalDestino);
+		return tramosRecorridos.stream().mapToDouble(s -> s.getPrecio()).sum();
 	}
 
-	public double tiempoTotalEntre(Terminal origen, Terminal destino) {
-		// Tengo el tramo origen
-		// Recorro los siguientes tramos y acumulo tiempo
-		// Encuentro el tramo con el destino y corto
-		// Retorno el tiempo acumulado
-		return (Double) null;
+	public Tramo tramoConTerminal(Terminal terminal) throws NoSuchElementException {
+		return this.tramos.stream().filter(t -> t.getOrigen().equals(terminal)).findFirst().orElseThrow();
 	}
 
-	public Integer nroTerminalesTotalEntre(Terminal origen, Terminal destino) {
-		// Tengo el tramo origen
-		// Recorro los siguientes tramos y acumulo cantidad de terminales vistas
-		// Encuentro el tramo con el destino y corto
-		// Retorno el nro de terminales vistas acumuladas
-		return null;
+	public ArrayList<Tramo> tramosRecorridosEntre(Terminal teminalOrigen, Terminal teminalDestino)
+			throws TramoExceptions {
+		this.validarTerminalEnCircuito(teminalOrigen); // valido que exista la terminal origen
+		this.validarTerminalEnCircuito(teminalDestino); // valido que exista la terminal destino
+		Tramo tramoOrigen = this.tramoConTerminal(teminalOrigen); // Tengo el tramo con Terminal origen
+		int itramoOrigen = this.tramos.indexOf(tramoOrigen); // obtengo su indice en la coleccion
+		Tramo tramoDestino = this.tramoConTerminal(teminalDestino);// Encuentro el tramo con Terminal destino
+		int itramoDestino = this.tramos.indexOf(tramoDestino); // obtengo su indice en la coleccion
+		ArrayList<Tramo> tramosRecorridos = new ArrayList<>(); // creo una coleccion nueva para el recorrido neto
+		int i = 0;
+		for (Tramo t : this.tramos) {
+			if (i >= itramoOrigen && i <= itramoDestino) {
+				tramosRecorridos.add(t); // almaceno solo los tramos recorridos, los estoy filtrando por su idice.
+			}
+			i++; // actualizo el indice
+		}
+		return tramosRecorridos; // devuelvo los tramos recorridos
+	}
+
+	public double tiempoTotalEntre(Terminal origen, Terminal destino) throws TramoExceptions{
+		ArrayList<Tramo> tramosRecorridos = this.tramosRecorridosEntre(origen, destino);
+		return tramosRecorridos.stream().mapToDouble(s -> s.getTiempo()).sum();
+	}
+
+	public Integer nroTerminalesTotalEntre(Terminal origen, Terminal destino) throws TramoExceptions{
+		ArrayList<Tramo> tramosRecorridos = this.tramosRecorridosEntre(origen, destino);
+		return tramosRecorridos.size();
 	}
 
 }
