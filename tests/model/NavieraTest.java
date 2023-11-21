@@ -1,6 +1,4 @@
-/**
- * 
- */
+
 package model;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -8,6 +6,8 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import java.util.ArrayList;
+import java.util.Arrays;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -50,17 +50,19 @@ class NavieraTest {
 	private CircuitoMaritimo circuito2;
 	private CircuitoMaritimo circuito3;
 	
+	//arrayTramos
+	
+	
 	
 	//terminal 
 	private Terminal terminal;
 	
 	
 	@BeforeEach
-	void setUp() throws Exception {
-		// instancio una clase que tengo disponible
-		viaje1 = new Viaje();
-		viaje2 = new Viaje();
-		viaje3 = new Viaje();
+	void setUp() throws Exception {  
+		viaje1 = mock(Viaje.class);
+		viaje2 =  mock(Viaje.class);
+		viaje3 =  mock(Viaje.class);
 		
 		// agrego al array
 		viajes.add(viaje1);

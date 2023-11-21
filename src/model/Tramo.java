@@ -11,9 +11,11 @@ public class Tramo {
 	private Terminal terminalOrigen; 
 	private Terminal terminalDestino;
 	private double precio;
-	private double tiempo; // el tiempo lo medelo como un double pueden ser meses, horas, dias,etc.
+	private int tiempo; 
+	// el tiempo lo medelo como un double pueden ser meses, horas, dias,etc. 
+	// yo lo pensé como si fuesen dias.
 
-	public Tramo(Terminal origen, Terminal destino, double precio, double tiempo) {
+	public Tramo(Terminal origen, Terminal destino, double precio, int tiempo) {
 		// TODO Auto-generated constructor stub
 		this.terminalOrigen = origen;
 		this.terminalDestino = destino;
@@ -31,7 +33,7 @@ public class Tramo {
 		return this.terminalDestino;
 	}
 
-	public double getTiempo() {
+	public int getTiempo() {
 		// TODO Auto-generated method stub
 		return this.tiempo;
 	}

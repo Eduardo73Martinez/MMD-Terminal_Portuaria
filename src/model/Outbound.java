@@ -3,9 +3,24 @@ package model;
 public class Outbound implements BuqueState {
 
 	private Inbound faseSiguiente;
+	private float kmANuevaTerminal = 50; //Kms
+
+	public Outbound() {}
+
+	public void setSiguiente(Inbound fase) {
+		this.faseSiguiente = fase;
+	}
 
 	@Override
-	public void siguiente(Buque buque) {
-		buque.setFase(this.faseSiguiente);
+	public Inbound siguiente(Buque b) {
+		b.recibir(this.faseSiguiente);
+		return this.faseSiguiente;
+	}
+
+	@Override
+	public boolean hayPosibilidadDeCambio(Buque buque) {
+		// TODO Auto-generated method stub
+		return (buque.kmsProximaTerminal() != 0 &&
+				buque.kmsProximaTerminal() >= this.kmANuevaTerminal);
 	}
 }

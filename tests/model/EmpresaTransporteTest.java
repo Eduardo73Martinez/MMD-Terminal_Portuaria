@@ -1,6 +1,7 @@
 package model;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.contains;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -12,11 +13,12 @@ class EmpresaTransporteTest {
 	Camion			  camion1;
 	Chofer			  chofer1;
 
-	//DOC
 	@BeforeEach
 	void setUp() throws Exception {
-	
-	//SUT
+
+ 	//DOC  
+
+  //SUT
 	this.empresa1 = new EmpresaTransporte();
 
 	}
@@ -47,6 +49,7 @@ class EmpresaTransporteTest {
 	@Test
 	void testGetChoferes() {
 		assertTrue(empresa1.getChoferes().isEmpty());
+		this.empresa1 = new EmpresaTransporte();
 	}
 
 	@Test

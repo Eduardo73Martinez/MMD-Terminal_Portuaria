@@ -7,26 +7,29 @@ public class Buque {
 
 	private BuqueState		fase;
 	private List<Carga> 	cargas 	 = new ArrayList<Carga>();
-	private Posicion		posicion;
+	private Posicion 		posicion;
 	private GPS				gps;
 	private Viaje			viaje;
-
-	public Buque(BuqueState fase, GPS gps, Viaje viaje) {
+	private int				tramoActual;
+	private boolean permitirCambioFase = false;
+ 
+	public Buque(BuqueState fase, Viaje viaje, GPS gps) {
 		// TODO Auto-generated constructor stub
 		this.fase = fase;
 		this.viaje = viaje;
+		this.tramoActual = 0;
 		this.gps = gps;
-		this.posicion = this.gps.getPosicion();
+		this.posicion = gps.getPosicion();
 	}
 
-	private Posicion getPosicion() {
+	public Posicion getPosicion() {
 		// TODO Auto-generated method stub
-		return this.posicion;
+		return this.gps.getPosicion();
 	}
 
 	public void preavisoA(Terminal terminal) {
 		// TODO Auto-generated method stub
-		terminal.recibirPreavisoPor(this);
+		terminal.recibirPreaviso(this);
 	}
 
 	public float distanciaA(Terminal terminal) {
@@ -45,14 +48,72 @@ public class Buque {
 		return this.fase;
 	}
 
-	public void cambiarFase(Buque b) {
+	private void cambiarFase() {
 		// TODO Auto-generated method stub
-		this.fase.siguiente(b);
+		this.setPermitirCambioFase(true);
+		this.recibir(this.fase.siguiente(this));
+		this.setPermitirCambioFase(false);
 	}
 
-	protected void setFase(BuqueState fase) {
+	private void setPermitirCambioFase(boolean b) {
+		// TODO Auto-generated method stub
+		this.permitirCambioFase = b;
+	}
+
+	private void setFase(BuqueState fase) {
 		// TODO Auto-generated method stub
 		this.fase = fase;
+	}
+
+	public void recibir(BuqueState fase) {
+		// TODO Auto-generated method stub
+		if (this.getPermitirCambioFase() ) {
+			this.setFase(fase);
+		}
+	}
+
+	public boolean getPermitirCambioFase() {
+		// TODO Auto-generated method stub
+		return this.permitirCambioFase;
+	}
+	
+	public void update() {
+		// TODO Auto-generated method stub
+		if (this.fase.hayPosibilidadDeCambio(this)) {
+			this.cambiarFase();
+		}
+	}
+
+	public float kmsProximaTerminal() {
+		// TODO Auto-generated method stub
+		return this.distanciaA(this.getProximaTerminal());
+	}
+
+	private Terminal getProximaTerminal() {
+		// TODO Auto-generated method stub
+		return this.viaje.getTramo(this.tramoActual).getDestino();
+	}
+
+	public boolean hayOrdenDeDepart() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+	public boolean hayOrdenDeWorking() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+	public void enviarEmailA(Terminal terminal) {
+		// TODO Auto-generated method stub
+		terminal.recibirEmail(new Email("Llegando" ,this.viaje.getOrden()));
+	}
+
+	public void avisarPartida(Departing departing) {
+		// TODO Auto-generated method stub
+		if (!this.viaje.getTerminalDestino().equals(this.getProximaTerminal())) {
+			this.tramoActual++;	
+		}
 	}
 
 }

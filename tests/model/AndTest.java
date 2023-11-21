@@ -28,9 +28,9 @@ public class AndTest {
 	@BeforeEach
 	public void setUp() {
 	// DOC (Depended-On-Component): nuestros doubles
-		this.viaje1 	= spy(Viaje.class);
+		this.viaje1 	= mock(Viaje.class);
 		this.viaje2 	= mock(Viaje.class);
-		this.viaje3 	= spy(Viaje.class);
+		this.viaje3 	= mock(Viaje.class);
 		viajes.add(viaje1);
 		viajes.add(viaje2);
 		viajes.add(viaje3);
