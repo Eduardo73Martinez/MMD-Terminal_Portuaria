@@ -64,8 +64,8 @@ public class TerminalPortuariaTest {
 	}
 	
 	@Test
-	void testHayBuqueCerca() {
-		assertEquals(false, terminalPortuaria.hayBuqueCerca());
+	void testGetBuqueCerca() {
+		assertEquals(false, terminalPortuaria.getBuqueCerca());
 	}
 	
 	@Test
@@ -76,13 +76,7 @@ public class TerminalPortuariaTest {
 	@Test
 	void testRecibirPreaviso() {
 		terminalPortuaria.recibirPreaviso(buque1);
-		assertEquals(true, terminalPortuaria.hayBuqueCerca());
-	}
-	
-	@Test
-	void testGetBuqueCerca() {
-		terminalPortuaria.getBuqueCerca();
-//		no sé cómo testear
+		assertEquals(true, terminalPortuaria.getBuqueCerca());
 	}
 	
 	@Test
@@ -184,6 +178,12 @@ public class TerminalPortuariaTest {
 	@Test
 	void testRegistrarCircuito() {
 		terminalPortuaria.registrarCircuito(circuito1);
+//		no sé cómo testear
+	}
+
+	@Test
+	void testQuitarCircuito() {
+		terminalPortuaria.quitarCircuito(circuito1);
 //		no sé cómo testear
 	}
 	

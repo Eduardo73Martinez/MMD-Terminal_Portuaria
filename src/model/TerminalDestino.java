@@ -15,5 +15,6 @@ public class TerminalDestino extends SimpleQuery {
 	@Override
 	public List<Viaje> filtrar() {
 		// TODO Auto-generated method stub
-		return viajes.stream().filter(v -> v.getTerminalDestino().equals(this.terminal)).toList();	}
+		return viajes.stream().filter(v -> v.getTerminalDestino().equals(this.terminal)).toList();
+	}
 }

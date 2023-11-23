@@ -10,5 +10,4 @@ public class MenorPrecio implements IOrden {
 		return circuitos.stream()
 				.reduce((c1, c2) -> c1.precioTotalEntre(terO, terD) < c2.precioTotalEntre(terO, terD) ? c1 : c2).get();
 	}
-
 }

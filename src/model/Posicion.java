@@ -4,7 +4,6 @@ public class Posicion {
 
 	public float	latitud;
 	public float	longitud;
-
 	
 	public Posicion(float latitud, float longitud) {
 		// TODO Auto-generated constructor stub

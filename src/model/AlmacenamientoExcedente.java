@@ -9,11 +9,9 @@ public class AlmacenamientoExcedente implements ServicioCarga {
 	private float		costoDiarioExc = 50;
 	private LocalDate	inicioAlmac;
 	private LocalDate	finalAlmac;
-	private Carga		container;
 
-	public AlmacenamientoExcedente(Carga container, LocalDate fechaInicio) {
+	public AlmacenamientoExcedente(LocalDate fechaInicio) {
 		// TODO Auto-generated constructor stub
-		this.container = container;
 		this.inicioAlmac = fechaInicio;
 	}
 

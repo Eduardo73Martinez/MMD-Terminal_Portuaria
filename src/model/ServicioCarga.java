@@ -2,6 +2,6 @@ package model;
 
 public interface ServicioCarga {
 
-	float costoTotal();
+	public float costoTotal();
 
 }

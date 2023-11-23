@@ -23,17 +23,13 @@ public class TerminalPortuaria implements Terminal {
 	 * Hacer métdodos de listas gestionadas en la terminal. Métodos CreateReadUpdateDelete
 	 */
 
-	Boolean hayBuqueCerca() { //es package para testear
-		return this.getBuqueCerca();
-	}
-	
 	@Override
 	public Posicion getPosicion() { //pública porque necesita conocerla, x ej., el buque
 		return this.posicion;
 	}
 
 	@Override
-	public void recibirPreaviso(Buque buque) { //es package para testear
+	public void recibirPreaviso(Buque buque) { 
 		this.buqueCerca = true; //Revisar si falta comportamiento
 	} 
 	
@@ -42,112 +38,65 @@ public class TerminalPortuaria implements Terminal {
 		this.shippers.stream().forEach(s->s.recibirEmail(email));
 	}
 
-	public Boolean getBuqueCerca() { //es package para testear
+	public Boolean getBuqueCerca() { 
 		// TODO Auto-generated method stub
 		return buqueCerca;
 	}
+
 	
-	public List<Camion> getCamionesRegistrados() { //sigue el orden CRUD (create está en atributos) //es package para testear
-		return this.camionesRegistrados;
-	}
+	// Camiones
+	public List<Camion> getCamionesRegistrados() { return this.camionesRegistrados;	}
+	public void registrarCamion(Camion camion) { this.camionesRegistrados.add(camion); }
+	public void quitarCamion(Camion camion) { this.camionesRegistrados.remove(camion); }
 	
-	public void registrarCamion(Camion camion) { //es package para testear
-		this.camionesRegistrados.add(camion);
-	}
+	// Choferes
+	public List<Chofer> getChoferesRegistrados() { return this.choferesRegistrados; }
+	public void registrarChofer(Chofer chofer) { this.choferesRegistrados.add(chofer); }
+	public void quitarChofer(Chofer chofer) { this.choferesRegistrados.remove(chofer); }	
 	
-	public void quitarCamion(Camion camion) { // es package para testear
-		this.camionesRegistrados.remove(camion);
-	}
+	// Empresas
+	public List<EmpresaTransporte> getEmpresasRegistradas() { return this.empresasRegistradas; }
+	public void registrarEmpresa(EmpresaTransporte empresa) { this.empresasRegistradas.add(empresa); }
+	public void quitarEmpresa(EmpresaTransporte empresa) { this.empresasRegistradas.remove(empresa); }
 	
-	public List<Chofer> getChoferesRegistrados() { //sigue el orden CRUD (create está en atributos) // es package para testear
-		return this.choferesRegistrados;
-	}
+	// Consignees
+	public List<Consignee> getConsignee() {	return this.consignees; }
+	public void registrarConsignee(Consignee consignee) { this.consignees.add(consignee); }
+	public void quitarConsignee(Consignee consignee) { this.consignees.remove(consignee); }
 	
-	public void registrarChofer(Chofer chofer) { // es package para testear
-		this.choferesRegistrados.add(chofer);
-	}
+	// Shippers
+	public List<Shipper> getShippers() { return this.shippers; }	
+	public void registrarShipper(Shipper shipper) {	this.shippers.add(shipper); }
+	public void quitarShipper(Shipper shipper) { this.shippers.remove(shipper); }
 	
-	public void quitarChofer(Chofer chofer) { // es package para testear
-		this.choferesRegistrados.remove(chofer);
-	}	
+	// Circuitos
+	public List<CircuitoMaritimo> getCircuitos() { return this.circuitos; }	
+	public void registrarCircuito(CircuitoMaritimo circuito) { this.circuitos.add(circuito); }	
+	public void quitarCircuito(CircuitoMaritimo circuito) { this.circuitos.remove(circuito); }
 	
-	public List<EmpresaTransporte> getEmpresasRegistradas() { //sigue el orden CRUD (create está en atributos) // es package para testear
-		return this.empresasRegistradas;
-	}
-	
-	public void registrarEmpresa(EmpresaTransporte empresa) { //es package para testear
-		this.empresasRegistradas.add(empresa);
-	}
-	
-	public void quitarEmpresa(EmpresaTransporte empresa) { //es package para testear
-		this.empresasRegistradas.remove(empresa);
-	}
-	
-	public List<Consignee> getConsignee() { //sigue el orden CRUD (create está en atributos) // es package para testear
-		return this.consignees;
-	}
-	
-	public void registrarConsignee(Consignee consignee) { // es package para testear
-		this.consignees.add(consignee);
-	}
-	
-	public void quitarConsignee(Consignee consignee) { // es package para testear
-		this.consignees.remove(consignee);
-	}
-	
-	public List<Shipper> getShippers() { //sigue el orden CRUD (create está en atributos) // es package para testear
-		return this.shippers;
-	}
-	
-	public void registrarShipper(Shipper shipper) { // es package para testear
-		this.shippers.add(shipper);
-	}
-	
-	public void quitarShipper(Shipper shipper) { // es package para testear
-		this.shippers.remove(shipper);
-	}
-	
-	public List<CircuitoMaritimo> getCircuitos() { //sigue el orden CRUD (create está en atributos) // es package para testear
-		return this.circuitos;
-	}
-	
-	public void registrarCircuito(CircuitoMaritimo circuito) { // es package para testear
-		this.circuitos.add(circuito);
-	}
-	
-	public void quitarCircuito(CircuitoMaritimo circuito) { // es package para testear
-		this.circuitos.remove(circuito);
-	}
-	
-	public List<Naviera> getNavieras() { //sigue el orden CRUD (create está en atributos) // es package para testear
-		return this.navieras;
-	}
-	
-	public void registrarNaviera(Naviera naviera) { // es package para testear
-		this.navieras.add(naviera);
-	}
-	
-	public void quitarNaviera(Naviera naviera) { // es package para testear
-		this.navieras.remove(naviera);
-	}
+	// Navieras
+	public List<Naviera> getNavieras() { return this.navieras; }	
+	public void registrarNaviera(Naviera naviera) { this.navieras.add(naviera); }
+	public void quitarNaviera(Naviera naviera) { this.navieras.remove(naviera); }
 	
 
-	public void envio(Shipper shipper, Carga carga, Viaje viaje, Camion camion, Chofer chofer) { //es package para testear
+	// Operaciones
+	public void envio(Shipper shipper, Carga carga, Viaje viaje, Camion camion, Chofer chofer) { 
 		// TODO Auto-generated method stub
 		
 	}
 
-	public void recepcion(Consignee consignee, Carga carga, Viaje viaje, Camion camion, Chofer chofer) { //es package para testear
+	public void recepcion(Consignee consignee, Carga carga, Viaje viaje, Camion camion, Chofer chofer) { 
 		// TODO Auto-generated method stub
 		
 	}
 
-	public void asignarTurno(ICliente cliente) { //es package para testear
+	public void asignarTurno(ICliente cliente) { 
 		// TODO Auto-generated method stub
 		
 	}
 
-	public List<Viaje> filtrar() { // es package para testear
+	public List<Viaje> filtrar() {
 		// TODO Auto-generated method stub
 		return null;
 		

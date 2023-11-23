@@ -18,5 +18,4 @@ public class FechaLlegada extends SimpleQuery {
 		// TODO Auto-generated method stub
 		return viajes.stream().filter(v -> v.getFechaDeLlegada().equals(this.fecha)).toList();
 	}
-
 }

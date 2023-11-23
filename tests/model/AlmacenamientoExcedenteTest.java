@@ -18,7 +18,6 @@ public class AlmacenamientoExcedenteTest {
 	private float		costoDiarioExc;
 	private LocalDate	inicioAlmac;
 	private LocalDate	finalAlmac;
-	private Carga		container;
 
 	
 	@BeforeEach
@@ -27,10 +26,9 @@ public class AlmacenamientoExcedenteTest {
 		this.costoDiarioExc	= 50;
 		this.inicioAlmac	= LocalDate.now();
 		this.finalAlmac		= this.inicioAlmac.plusDays(1);
-		this.container 		= mock(Carga.class);
 
 		// SUT (System Under Test): objeto a testear
-		this.excedente = new AlmacenamientoExcedente(this.container, this.inicioAlmac);
+		this.excedente = new AlmacenamientoExcedente(this.inicioAlmac);
 	}
 
 	@Test
