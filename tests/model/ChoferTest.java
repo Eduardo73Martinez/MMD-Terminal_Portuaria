@@ -11,16 +11,21 @@ class ChoferTest {
 	Chofer chofer1;
 	
 	@BeforeEach
-	void setUp() throws Exception {
-	//DOC
-		
-	//SUT
-		chofer1 = new Chofer();
+	void setUp()  {
+		chofer1 = new Chofer("diego" , 33);
 	}
 
 	@Test
 	void testConstructor() {
-		assertNotNull(chofer1);
+		assertEquals(chofer1.getClass(), Chofer.class);
+	}
+	@Test
+	void getNombreTest() {
+		assertEquals(chofer1.getNombre(), "diego");
+	}
+	@Test
+	void getEdadTest() {
+		assertEquals(chofer1.getEdad(), 33);
 	}
 
 }
