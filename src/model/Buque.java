@@ -8,7 +8,6 @@ public class Buque {
 
 	private BuqueState		fase;
 	private List<Carga> 	cargas 	 = new ArrayList<Carga>();
-	private Posicion 		posicion;
 	private GPS				gps; 
 	private Viaje			viaje;
 	private int				tramoActual;
@@ -20,7 +19,6 @@ public class Buque {
 		this.viaje = viaje;
 		this.tramoActual = 0;
 		this.gps = gps;
-		this.posicion = gps.getPosicion();
 	}
 
 	public Posicion getPosicion() {
@@ -38,7 +36,7 @@ public class Buque {
 		return this.distancia(this.getPosicion(), terminal.getPosicion());
 	}
 
-	public float distancia(Posicion p1, Posicion p2) {
+	private float distancia(Posicion p1, Posicion p2) {
 		// Taken from: https://stackoverflow.com/questions/14431032/i-want-to-calculate-the-distance-between-two-points-in-java
 		return (float) Math.hypot( (p1.getLatitud() - p2.getLatitud())
 						 , (p1.getLongitud() - p2.getLongitud()) );
