@@ -9,12 +9,12 @@ package model;
  */
 public class Email {
 	private String mensaje;
-	private OrdenBasicaTP orden;
+	private Factura factura;
 
-	public Email(String mensaje, OrdenBasicaTP orden) {
+	public Email(String mensaje, Factura factura) {
 		super();
 		this.mensaje = mensaje;
-		this.orden = orden;
+		this.factura = factura;
 	}
 
 	public String getMensaje() {
@@ -22,7 +22,11 @@ public class Email {
 	}
 
 	public OrdenBasicaTP getOrden() {
-		return orden;
+		return this.factura.getOrden();
+	}
+
+	public Factura getFactura() {
+		return factura;
 	}
 
 }

@@ -1,6 +1,7 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class Buque {
@@ -8,7 +9,7 @@ public class Buque {
 	private BuqueState		fase;
 	private List<Carga> 	cargas 	 = new ArrayList<Carga>();
 	private Posicion 		posicion;
-	private GPS				gps;
+	private GPS				gps; 
 	private Viaje			viaje;
 	private int				tramoActual;
 	private boolean permitirCambioFase = false;
@@ -45,7 +46,7 @@ public class Buque {
 
 	public BuqueState getFase() {
 		// TODO Auto-generated method stub
-		return this.fase;
+		return this.fase; 
 	}
 
 	private void cambiarFase() {
@@ -106,7 +107,8 @@ public class Buque {
 
 	public void enviarEmailA(Terminal terminal) {
 		// TODO Auto-generated method stub
-		terminal.recibirEmail(new Email("Llegando" ,this.viaje.getOrden()));
+		Factura factura = new Factura(new Date(), "receptor", viaje.getOrden(), this.viaje);
+		terminal.recibirEmail(new Email("Llegando" ,factura));
 	}
 
 	public void avisarPartida(Departing departing) {
