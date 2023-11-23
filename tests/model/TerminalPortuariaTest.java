@@ -230,19 +230,20 @@ public class TerminalPortuariaTest {
   		terminalPortuaria.filtrar();
 
   	}
-
+  	
   	void testElMejorCircuito() {
   		terminalPortuaria.elMejorCircuito(terminal1);
   		
   	}
-
+  	@Test
   	void testSetPrioridad() {
   		terminalPortuaria.setPrioridad(prioridad1);
   		assertEquals(prioridad1, terminalPortuaria.getPrioridad());
   	}
-  	
+  	@Test
   	void testGetPrioridad() {
   		terminalPortuaria.getPrioridad();
+  		assertEquals(prioridad1, terminalPortuaria.getPrioridad());
 
   	}
   	
