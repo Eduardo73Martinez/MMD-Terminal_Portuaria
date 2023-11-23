@@ -6,4 +6,6 @@ public interface BuqueState {
 
 	public boolean hayPosibilidadDeCambio(Buque buque);
 
+	public void avisarCambio(Buque buque);
+
 }

@@ -19,4 +19,15 @@ public class Arrived implements BuqueState {
 		// TODO Auto-generated method stub
 		return buque.hayOrdenDeWorking();
 	}
+
+	@Override
+	public void avisarCambio(Buque buque) { // Por polimorfismo
+		// Debería avisar a la naviera:
+		// Posibilidades:
+		// 	a) Completó su viaje (Está en la terminal origen y tiene que asignarse nuevo viaje)
+		//  b) Sigue su viaje (la naviera NO asigna nuevo viaje)
+		if (buque.enUltimoTramo()) {
+			// Naviera tendría que asignarle nuevo viaje
+		}
+	}
 }

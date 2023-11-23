@@ -79,6 +79,7 @@ public class Buque {
 	public void update() {
 		// TODO Auto-generated method stub
 		if (this.fase.hayPosibilidadDeCambio(this)) {
+			this.fase.avisarCambio(this);
 			this.cambiarFase();
 		}
 	}
@@ -88,7 +89,7 @@ public class Buque {
 		return this.distanciaA(this.getProximaTerminal());
 	}
 
-	private Terminal getProximaTerminal() {
+	public Terminal getProximaTerminal() {
 		// TODO Auto-generated method stub
 		return this.viaje.getTramo(this.tramoActual).getDestino();
 	}
@@ -111,9 +112,14 @@ public class Buque {
 
 	public void avisarPartida(Departing departing) {
 		// TODO Auto-generated method stub
-		if (!this.viaje.getTerminalDestino().equals(this.getProximaTerminal())) {
-			this.tramoActual++;	
+		if (!this.enUltimoTramo()) {
+			this.tramoActual++;
 		}
+	}
+
+	public boolean enUltimoTramo() {
+		// TODO Auto-generated method stub
+		return this.viaje.getTerminalDestino().equals(this.getProximaTerminal());
 	}
 
 }

@@ -22,4 +22,10 @@ public class Departing implements BuqueState {
 		return (buque.kmsProximaTerminal() != 0 &&
 				buque.kmsProximaTerminal() <= this.kmANuevaTerminal);
 	}
+
+	@Override
+	public void avisarCambio(Buque buque) {
+		// TODO Auto-generated method stub
+		buque.getProximaTerminal().recibirPreaviso(buque);
+	}
 }

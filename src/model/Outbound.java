@@ -23,4 +23,10 @@ public class Outbound implements BuqueState {
 		return (buque.kmsProximaTerminal() != 0 &&
 				buque.kmsProximaTerminal() >= this.kmANuevaTerminal);
 	}
+
+	@Override
+	public void avisarCambio(Buque buque) {
+		// TODO Auto-generated method stub
+		buque.enviarEmailA(buque.getProximaTerminal());
+	}
 }

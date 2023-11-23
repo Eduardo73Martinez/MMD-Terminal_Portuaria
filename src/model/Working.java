@@ -17,6 +17,9 @@ public class Working implements BuqueState {
 	@Override
 	public boolean hayPosibilidadDeCambio(Buque buque) {
 		// TODO Auto-generated method stub
-		return buque.hayOrdenDeDepart();
+		return !buque.enUltimoTramo() && buque.hayOrdenDeDepart();
 	}
+
+	@Override
+	public void avisarCambio(Buque buque) {} // Por polimorfismo
 }

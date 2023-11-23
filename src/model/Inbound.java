@@ -20,4 +20,7 @@ public class Inbound implements BuqueState {
 		// TODO Auto-generated method stub
 		return (this.kmANuevaTerminal == buque.kmsProximaTerminal());
 	}
+
+	@Override
+	public void avisarCambio(Buque buque) {} // Por polimorfismo
 }
