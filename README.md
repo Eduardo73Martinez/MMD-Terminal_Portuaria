@@ -1,6 +1,10 @@
 # Terminal Portuaria
+
 Trabajo Final de programación orientada a Objetos 2 (UNQ)
-![](https://github.com/Eduardo73Martinez/MMD-Terminal_Portuaria/blob/main/terminalPortuaria.jpg)
+<br> </br>
+<br> </br>
+<br> </br>
+![Terminal](https://github.com/Eduardo73Martinez/MMD-Terminal_Portuaria/blob/main/terminalPortuaria.jpg)
 
 
 ## UML 
