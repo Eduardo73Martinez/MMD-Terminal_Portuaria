@@ -40,8 +40,8 @@ public class OrTest {
 		this.terminal1	= mock(Terminal.class);
 		this.terminal2	= mock(Terminal.class);
 
-		this.critFechaLlegada1 	= spy(new FechaLlegada(this.fecha1, this.viajes));
-		this.critTerminalDestino1 	= spy(new TerminalDestino(this.terminal1, this.viajes));
+		this.critFechaLlegada1 	= spy(new FechaLlegada(this.fecha1));
+		this.critTerminalDestino1 	= spy(new TerminalDestino(this.terminal1));
 
 		// SUT (System Under Test): objeto a testear
 		this.or = new Or(this.critFechaLlegada1, this.critTerminalDestino1);
@@ -66,9 +66,9 @@ public class OrTest {
 		// viaje 1 tiene la fecha de llegada
 		// viaje 1 y 3 tienen el destino
 
-		assertFalse(or.filtrar().contains(viaje2));
+		assertFalse(or.filtrar(viajes).contains(viaje2));
 
-		verify(critFechaLlegada1, times(1)).filtrar();
+		verify(critFechaLlegada1, times(1)).filtrar(this.viajes);
 		verify(viaje1, times(1)).getFechaDeLlegada();
 		verify(viaje3, times(1)).getTerminalDestino();
 	}

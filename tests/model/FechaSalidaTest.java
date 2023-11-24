@@ -42,7 +42,7 @@ public class FechaSalidaTest {
 		when(this.viaje3.getFechaDeSalida()).thenReturn(fecha2);
 
 		// SUT (System Under Test): objeto a testear
-		this.fechaSalida = new FechaSalida(fecha, this.viajes);
+		this.fechaSalida = new FechaSalida(fecha);
 	}
 
 	@Test
@@ -53,6 +53,6 @@ public class FechaSalidaTest {
 	@Test
 	public void testFiltrar() {
 		List<Viaje> viajesEsperados = Arrays.asList(viaje1);
-		assertEquals(viajesEsperados, this.fechaSalida.filtrar());
+		assertEquals(viajesEsperados, this.fechaSalida.filtrar(this.viajes));
 	}
 }

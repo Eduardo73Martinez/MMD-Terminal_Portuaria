@@ -8,5 +8,5 @@ public abstract class CompositeQuery implements IQuery {
 	protected IQuery query1;
 	protected IQuery query2;
 
-	public abstract List<Viaje> filtrar();
+	public abstract List<Viaje> filtrar(List<Viaje> vs);
 }

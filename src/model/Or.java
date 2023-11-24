@@ -13,11 +13,11 @@ public class Or extends CompositeQuery {
 	}
 
 	@Override
-	public List<Viaje> filtrar() {
+	public List<Viaje> filtrar(List<Viaje> viajes) {
 		Set<Viaje> setViaje1 = new HashSet<Viaje>();
 		Set<Viaje> setViaje2 = new HashSet<Viaje>();
-		setViaje1.addAll(query1.filtrar());
-		setViaje2.addAll(query2.filtrar());
+		setViaje1.addAll(query1.filtrar(viajes));
+		setViaje2.addAll(query2.filtrar(viajes));
 		Set<Viaje> setViaje3 = new HashSet<Viaje>(setViaje1);
 		setViaje3.addAll(setViaje2);
 		return setViaje3.stream().toList();
