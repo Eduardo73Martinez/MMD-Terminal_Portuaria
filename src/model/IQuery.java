@@ -4,5 +4,5 @@ import java.util.List;
 
 public interface IQuery {
 
-	public List<Viaje> filtrar();
+	public List<Viaje> filtrar(List<Viaje> vs);
 }

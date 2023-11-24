@@ -41,7 +41,7 @@ public class TerminalOrigenTest {
 		when(this.viaje3.getTerminalOrigen()).thenReturn(terminal2);
 
 		// SUT (System Under Test): objeto a testear
-		this.terminalOrigen = new TerminalOrigen(terminal, this.viajes);
+		this.terminalOrigen = new TerminalOrigen(terminal);
 	}
 
 	@Test
@@ -52,6 +52,6 @@ public class TerminalOrigenTest {
 	@Test
 	public void testFiltrar() {
 		List<Viaje> viajesEsperados = Arrays.asList(viaje1);
-		assertEquals(viajesEsperados, this.terminalOrigen.filtrar());
+		assertEquals(viajesEsperados, this.terminalOrigen.filtrar(this.viajes));
 	}
 }

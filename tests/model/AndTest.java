@@ -40,8 +40,8 @@ public class AndTest {
 		this.terminal1	= mock(Terminal.class);
 		this.terminal2	= mock(Terminal.class);
 
-		this.critFechaLlegada1 		= spy(new FechaLlegada(this.fecha1, this.viajes));
-		this.critTerminalDestino1 	= spy(new TerminalDestino(this.terminal1, this.viajes));
+		this.critFechaLlegada1 		= spy(new FechaLlegada(this.fecha1));
+		this.critTerminalDestino1 	= spy(new TerminalDestino(this.terminal1));
 
 		// SUT (System Under Test): objeto a testear
 		this.and = new And(this.critFechaLlegada1, this.critTerminalDestino1);
@@ -65,8 +65,8 @@ public class AndTest {
 
 		// solo viaje 1 tiene la fecha de llegada y el destino
 
-		assertTrue(and.filtrar().contains(viaje1));
-		assertFalse(and.filtrar().contains(viaje2));
-		assertFalse(and.filtrar().contains(viaje3));
+		assertTrue(and.filtrar(viajes).contains(viaje1));
+		assertFalse(and.filtrar(viajes).contains(viaje2));
+		assertFalse(and.filtrar(viajes).contains(viaje3));
 	}
 }
