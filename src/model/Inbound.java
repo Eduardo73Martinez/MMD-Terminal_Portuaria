@@ -10,8 +10,7 @@ public class Inbound implements BuqueState {
 	}
 
 	@Override
-	public Arrived siguiente(Buque b) {
-		b.recibir(this.faseSiguiente);
+	public Arrived siguiente() {
 		return this.faseSiguiente;
 	}
 
@@ -23,4 +22,13 @@ public class Inbound implements BuqueState {
 
 	@Override
 	public void avisarCambio(Buque buque) {} // Por polimorfismo
+	
+	@Override
+	public void gestionarCambio(Buque buque) {
+		// TODO Auto-generated method stub
+		if (this.hayPosibilidadDeCambio(buque)) {
+			this.avisarCambio(buque);
+			buque.setFase(this.siguiente());
+		}
+	}
 }

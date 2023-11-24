@@ -12,8 +12,7 @@ public class Outbound implements BuqueState {
 	}
 
 	@Override
-	public Inbound siguiente(Buque b) {
-		b.recibir(this.faseSiguiente);
+	public Inbound siguiente() {
 		return this.faseSiguiente;
 	}
 
@@ -28,5 +27,14 @@ public class Outbound implements BuqueState {
 	public void avisarCambio(Buque buque) {
 		// TODO Auto-generated method stub
 		buque.enviarEmailA(buque.getProximaTerminal());
+	}
+
+	@Override
+	public void gestionarCambio(Buque buque) {
+		// TODO Auto-generated method stub
+		if (this.hayPosibilidadDeCambio(buque)) {
+			this.avisarCambio(buque);
+			buque.setFase(this.siguiente());
+		}
 	}
 }

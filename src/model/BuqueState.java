@@ -2,7 +2,9 @@ package model;
 
 public interface BuqueState {
 
-	public BuqueState siguiente(Buque b);
+	public BuqueState siguiente();
+
+	public void gestionarCambio(Buque buque);
 
 	public boolean hayPosibilidadDeCambio(Buque buque);
 

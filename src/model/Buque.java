@@ -11,7 +11,6 @@ public class Buque {
 	private GPS				gps; 
 	private Viaje			viaje;
 	private int				tramoActual;
-	private boolean permitirCambioFase = false;
  
 	public Buque(BuqueState fase, Viaje viaje, GPS gps) {
 		// TODO Auto-generated constructor stub
@@ -47,41 +46,24 @@ public class Buque {
 		return this.fase; 
 	}
 
-	private void cambiarFase() {
-		// TODO Auto-generated method stub
-		this.setPermitirCambioFase(true);
-		this.recibir(this.fase.siguiente(this));
-		this.setPermitirCambioFase(false);
-	}
-
-	private void setPermitirCambioFase(boolean b) {
-		// TODO Auto-generated method stub
-		this.permitirCambioFase = b;
-	}
-
-	private void setFase(BuqueState fase) {
+	void setFase(BuqueState fase) {
 		// TODO Auto-generated method stub
 		this.fase = fase;
 	}
 
-	public void recibir(BuqueState fase) {
-		// TODO Auto-generated method stub
-		if (this.getPermitirCambioFase() ) {
-			this.setFase(fase);
-		}
-	}
-
-	public boolean getPermitirCambioFase() {
-		// TODO Auto-generated method stub
-		return this.permitirCambioFase;
-	}
-	
 	public void update() {
 		// TODO Auto-generated method stub
-		if (this.fase.hayPosibilidadDeCambio(this)) {
-			this.fase.avisarCambio(this);
-			this.cambiarFase();
-		}
+		this.fase.gestionarCambio(this);
+	}
+	
+	public boolean enUltimoTramo() {
+		// TODO Auto-generated method stub
+		return this.viaje.getTerminalDestino().equals(this.getProximaTerminal());
+	}
+	
+	void siguienteTramo() {
+		// TODO Auto-generated method stub
+		this.tramoActual++;
 	}
 
 	public float kmsProximaTerminal() {
@@ -108,18 +90,6 @@ public class Buque {
 		// TODO Auto-generated method stub
 		Factura factura = new Factura(new Date(), "receptor", viaje.getOrden(), this.viaje);
 		terminal.recibirEmail(new Email("Llegando" ,factura));
-	}
-
-	public void avisarPartida(Departing departing) {
-		// TODO Auto-generated method stub
-		if (!this.enUltimoTramo()) {
-			this.tramoActual++;
-		}
-	}
-
-	public boolean enUltimoTramo() {
-		// TODO Auto-generated method stub
-		return this.viaje.getTerminalDestino().equals(this.getProximaTerminal());
 	}
 
 }
