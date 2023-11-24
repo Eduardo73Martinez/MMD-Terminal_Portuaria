@@ -1,9 +1,16 @@
 # Terminal Portuaria
 
 Trabajo Final de programación orientada a Objetos 2 (UNQ)
+1.[Objetivo](#Objetivo)
+2.[UML](#UML)
+3.[Documentacion](#Documentación)
+4.[Integrantes](#Integrantes)
 <br> </br>
-<br> </br>
+
 ![Terminal](https://github.com/Eduardo73Martinez/MMD-Terminal_Portuaria/blob/main/terminalPortuaria.jpg)
+
+## Objetivo
+[acá](https://github.com/Eduardo73Martinez/MMD-Terminal_Portuaria/blob/main/Trabajo%20Final%202do%20Sem%202023%20-%20Terminal%20Portuaria.pdf)
 
 
 ## UML 
