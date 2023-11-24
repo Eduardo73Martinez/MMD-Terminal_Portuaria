@@ -22,7 +22,7 @@ class ViajeTest {
 	private CircuitoMaritimo circuito1;
 	private Buque buque1;
 	private Viaje viaje;
-	private LocalDate fechaSalida = mock(LocalDate.class);;
+	private LocalDate fechaSalida = LocalDate.now();
 	private Tramo t1 = mock(Tramo.class);
 	private Tramo t2 = mock(Tramo.class);
 	private Tramo t3 = mock(Tramo.class);
