@@ -12,15 +12,12 @@ public class Viaje {
 	private LocalDate fechaDeSalida;
 	private CircuitoMaritimo recorrido;
 	private Buque buque;
-	private List<Tramo> tramos;
 	private OrdenBasicaTP orden;
 	// suponemos que el viaje un recorrido de tramos de un circuito. Puede ser un
 	// circuito completo si lo desea.
 
-	public Viaje(LocalDate fechaDeSalida, List<Tramo> tramos, CircuitoMaritimo circuito, Buque buque,
-			OrdenBasicaTP orden) {
+	public Viaje(LocalDate fechaDeSalida, CircuitoMaritimo circuito, Buque buque, OrdenBasicaTP orden) {
 		this.fechaDeSalida = fechaDeSalida;
-		this.tramos = tramos;
 		this.recorrido = circuito;
 		this.buque = buque;
 		this.orden = orden;
@@ -34,39 +31,32 @@ public class Viaje {
 
 	public LocalDate getFechaDeLlegada() {
 		// TODO Auto-generated method stub
-		int diasDeViaje = this.tramos.stream().mapToInt(s -> s.getTiempo()).sum();
+		int diasDeViaje = this.recorrido.tiempoTotalDelCircuito();
 		return this.fechaDeSalida.plusDays(diasDeViaje);
 	}
 
 	public Terminal getTerminalDestino() throws IndexOutOfBoundsException {
 		// TODO Auto-generated method stub
-		try {
-			return this.tramos.get(tramos.size() - 1).getOrigen();
-		} catch (IndexOutOfBoundsException e) {
-			throw new IndexOutOfBoundsException("No hay terminal destino en el viaje");
-		}
+		return this.recorrido.getTerminalDestino();
 	}
 
-	public Terminal getTerminalOrigen() throws IndexOutOfBoundsException {
+	public Terminal getTerminalOrigen() {
 		// TODO Auto-generated method stub
-		try {
-			return this.tramos.get(0).getOrigen();
-		} catch (IndexOutOfBoundsException e) {
-			throw new IndexOutOfBoundsException("No hay terminal origen en el viaje");
-		}
+		return this.recorrido.getTerminalOrigen();
 	}
 
 	public void validarViaje(List<Tramo> tramos) throws TramoExceptions {
-		if (! this.todosLosTramosPertencenAlCircuito(tramos)) {
+		if (!this.todosLosTramosPertencenAlCircuito(tramos)) {
 			throw new TramoExceptions("El viaje completo no está en el circuito dado");
 		}
 	}
+
 	public boolean todosLosTramosPertencenAlCircuito(List<Tramo> tramos) {
 		return this.recorrido.getTramos().containsAll(tramos);
 	}
 
 	public double getCosto() {
-		return this.tramos.stream().mapToDouble(s -> s.getPrecio()).sum();
+		return this.recorrido.precioTotal();
 	}
 
 	public OrdenBasicaTP getOrden() {
@@ -75,11 +65,12 @@ public class Viaje {
 
 	public Tramo getTramo(int idxTramo) throws IndexOutOfBoundsException {
 		// TODO Auto-generated method stub
-		return this.getTramos().get(idxTramo);
+		return this.recorrido.getTramos().get(idxTramo);
 	}
 
-	public List<Tramo> getTramos() {
-		return this.tramos;
+	public Buque getBuque() {
+		// TODO Auto-generated method stub
+		return this.buque;
 	}
 
 }
