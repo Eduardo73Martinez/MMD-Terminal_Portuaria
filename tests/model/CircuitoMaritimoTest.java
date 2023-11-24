@@ -248,5 +248,31 @@ class CircuitoMaritimoTest {
 
 		assertEquals(2, circuito.nroTerminalesTotalEntre(teminalOrigen1, teminalOrigen2));
 	}
+	@Test 
+	void getTerminalOrigenTest() {
+		when(tramoNavegacion1.getOrigen()).thenReturn(teminalOrigen1);
+		when(tramoNavegacion2.getOrigen()).thenReturn(teminalOrigen2);
+		when(tramoNavegacion3.getOrigen()).thenReturn(teminalDestino1);
+		
+		circuito.getTerminalOrigen();
+		
+		verify(tramoNavegacion1).getOrigen(); // solo llama al origen del primer tramo
+		verify(tramoNavegacion2, never()).getOrigen();
+		verify(tramoNavegacion3, never()).getOrigen();
+	}
+	@Test 
+	void getTerminalDestinoTest() {
+		when(tramoNavegacion1.getOrigen()).thenReturn(teminalOrigen1);
+		when(tramoNavegacion2.getOrigen()).thenReturn(teminalOrigen2);
+		when(tramoNavegacion3.getOrigen()).thenReturn(teminalDestino1);
+		
+		
+		circuito.getTerminalDestino(); 
+		
+		verify(tramoNavegacion1, never()).getOrigen();
+		verify(tramoNavegacion2).getOrigen();
+		verify(tramoNavegacion3, never()).getOrigen();
+	}
+
 
 }

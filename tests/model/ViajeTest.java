@@ -29,7 +29,6 @@ class ViajeTest {
 	private ArrayList<Tramo> tramos = new ArrayList<>();
 	private Terminal terminal1 = mock(Terminal.class);
 	private Terminal terminal2 = mock(Terminal.class);
-	private Terminal terminal3 = mock(Terminal.class);
 	private ArrayList<Tramo> tramos2 = new ArrayList<>();
 	private OrdenBasicaTP orden = mock(OrdenBasicaTP.class);
 
@@ -40,7 +39,7 @@ class ViajeTest {
 		tramos.add(t1);
 		tramos.add(t2);
 		tramos.add(t3);
-		viaje = new Viaje(fechaSalida, tramos, circuito1, buque1, orden);
+		viaje = new Viaje(fechaSalida, circuito1, buque1, orden);
 	}
 
 	@Test
@@ -55,49 +54,30 @@ class ViajeTest {
 
 	@Test
 	void testGetFechaDeLlegada() {
-		when(t1.getTiempo()).thenReturn(10);
-		when(t2.getTiempo()).thenReturn(9);
-		when(t3.getTiempo()).thenReturn(3);
+		when(circuito1.tiempoTotalDelCircuito()).thenReturn(45);
 		
 		viaje.getFechaDeLlegada();
 		
-		verify(t1).getTiempo();
-		verify(t2).getTiempo();
-		verify(t3).getTiempo();
+		verify(circuito1).tiempoTotalDelCircuito();
+		
 	}
 
 	@Test
 	void testGetTerminalDestino() {
-		when(t1.getDestino()).thenReturn(terminal1);
-		when(t2.getDestino()).thenReturn(terminal2);
-		when(t3.getDestino()).thenReturn(terminal3);
+		when(circuito1.getTerminalDestino()).thenReturn(terminal2);
 		
 		viaje.getTerminalDestino();
 		
-		verify(t1, never()).getOrigen();
-		verify(t2, never()).getOrigen();
-		verify(t3).getOrigen();
-		
-		Viaje viaje2 = new Viaje(fechaSalida, tramos2, circuito1, buque1, orden);
-		
-		assertThrows(IndexOutOfBoundsException.class, ()->{viaje2.getTerminalDestino();});
+		verify(circuito1).getTerminalDestino();
 	}
 
 	@Test
 	void testGetTerminalOrigen() {
-		when(t1.getOrigen()).thenReturn(terminal1);
-		when(t2.getOrigen()).thenReturn(terminal2);
-		when(t3.getOrigen()).thenReturn(terminal3);
+		when(circuito1.getTerminalOrigen()).thenReturn(terminal1);
 		
 		viaje.getTerminalOrigen();
 		
-		verify(t1).getOrigen();
-		verify(t2, never()).getOrigen();
-		verify(t3, never()).getOrigen();
-		
-		Viaje viaje2 = new Viaje(fechaSalida, tramos2, circuito1, buque1, orden);
-		
-		assertThrows(IndexOutOfBoundsException.class, ()->{viaje2.getTerminalOrigen();});
+		verify(circuito1).getTerminalOrigen();
 		
 	}
 
@@ -114,15 +94,13 @@ class ViajeTest {
 
 	@Test 
 	void getCostoTest() {
-		when(t1.getPrecio()).thenReturn(1000.0);
-		when(t2.getPrecio()).thenReturn(9000.0);
-		when(t3.getPrecio()).thenReturn(30.0);
+		when(circuito1.precioTotal()).thenReturn(1000.0);
+	
 		
 		viaje.getCosto();
 		
-		verify(t1).getPrecio();
-		verify(t2).getPrecio();
-		verify(t3).getPrecio();
+		verify(circuito1).precioTotal();
+	
 	}
 
 	@Test
@@ -133,23 +111,26 @@ class ViajeTest {
 	}
 
 	@Test
-	void getTramosTest() {
-		assertEquals(tramos, viaje.getTramos());
-	}
-
-	@Test
 	void getIndexTramosTest() {
-
-		assertThrows(IndexOutOfBoundsException.class, () -> {
-			viaje.getTramo(4);
-		});
-		assertEquals(t1, viaje.getTramo(0));
+		when(circuito1.getTramos()).thenReturn(tramos);
+		
+		viaje.getTramo(0);
+		
+		verify(circuito1).getTramos();
+		
+		assertThrows(IndexOutOfBoundsException.class, ()->{viaje.getTramo(5);});
+		
 	}
 
 	@Test 
 	void todosLosTramosPertencenAlCircuitoTest() {
 		when(circuito1.getTramos()).thenReturn(tramos);
 		assertTrue(viaje.todosLosTramosPertencenAlCircuito(tramos));
+	}
+
+	@Test
+	void getBuqueTest() {
+		assertEquals(buque1, viaje.getBuque());
 	}
 
 }

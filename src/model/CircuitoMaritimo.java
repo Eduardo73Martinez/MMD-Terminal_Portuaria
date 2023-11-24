@@ -2,6 +2,7 @@
  * 
  */
 package model;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -38,13 +39,15 @@ public class CircuitoMaritimo {
 		int indiceTAnterior = this.tramos.indexOf(tramoAnterior);
 
 		if (this.esUltimoTramo(tramoAnterior)) {
-			nuevoTramo.setDestino(this.tramos.get(0).getOrigen());
+			nuevoTramo.setDestino(this.tramos.get(0).getOrigen()); 
+			// si es el último tramo le settea  el origen para que cierre el circuito nuevamente.
 		} else {
-			nuevoTramo.setDestino(this.tramos.get(indiceTAnterior + 1).getOrigen());
+			nuevoTramo.setDestino(this.tramos.get(indiceTAnterior).getDestino());
+			//si no es el último se le settea como destino ,al tramo nuevo, el destino que ya estaba en el tramo anterior.
 		}
-		this.tramos.get(indiceTAnterior).setDestino(nuevoTramo.getOrigen());
-		this.tramos.add(indiceTAnterior + 1, nuevoTramo);
-
+		this.tramos.get(indiceTAnterior).setDestino(nuevoTramo.getOrigen()); // se le settea como destino al tramo anterior el nuevo tramo
+		this.tramos.add(indiceTAnterior + 1, nuevoTramo); // se agrega el nuevo tramo como consecutivo del tramo anterior.
+		//el array corre todos los indices.
 	}
 
 	public boolean esUltimoTramo(Tramo tramo) {
@@ -100,15 +103,15 @@ public class CircuitoMaritimo {
 		return this.tramos.stream().anyMatch(s -> s.getOrigen() == terminal);
 	}
 
-	public double tiempoTotalDelCircuito() {
-		return this.tramos.stream().mapToDouble(s -> s.getTiempo()).sum();
+	public int tiempoTotalDelCircuito() {
+		return this.tramos.stream().mapToInt(s -> s.getTiempo()).sum();
 	}
 
 	public double precioTotal() {
 		return this.tramos.stream().mapToDouble(s -> s.getPrecio()).sum();
 	}
 
-	public double precioTotalEntre(Terminal teminalOrigen, Terminal teminalDestino)throws TramoExceptions {
+	public double precioTotalEntre(Terminal teminalOrigen, Terminal teminalDestino) throws TramoExceptions {
 		ArrayList<Tramo> tramosRecorridos = this.tramosRecorridosEntre(teminalOrigen, teminalDestino);
 		return tramosRecorridos.stream().mapToDouble(s -> s.getPrecio()).sum();
 	}
@@ -136,14 +139,33 @@ public class CircuitoMaritimo {
 		return tramosRecorridos; // devuelvo los tramos recorridos
 	}
 
-	public double tiempoTotalEntre(Terminal origen, Terminal destino) throws TramoExceptions{
+	public double tiempoTotalEntre(Terminal origen, Terminal destino) throws TramoExceptions {
 		ArrayList<Tramo> tramosRecorridos = this.tramosRecorridosEntre(origen, destino);
 		return tramosRecorridos.stream().mapToDouble(s -> s.getTiempo()).sum();
 	}
 
-	public Integer nroTerminalesTotalEntre(Terminal origen, Terminal destino) throws TramoExceptions{
+	public Integer nroTerminalesTotalEntre(Terminal origen, Terminal destino) throws TramoExceptions {
 		ArrayList<Tramo> tramosRecorridos = this.tramosRecorridosEntre(origen, destino);
 		return tramosRecorridos.size();
 	}
+	/**
+	 * 
+	 * @return Terminal 
+	 * según el modelo del circuito no necesito de un bloque Try/catch  en estas 
+	 * ultimas dos funciones getTerminalDestino()/getTerminalOrigen() porque siempre voy
+	 * a tener una terminal de origen y otra de destino en el circuito
+	 * si no fuera así deberia agregar una excepcion. La version anterior 
+	 * la contenia.
+	 */
+	public Terminal getTerminalDestino()  {
+		// TODO Auto-generated method stub
+			return this.tramos.get(tramos.size() - 1).getOrigen();
 
+	}
+
+	public Terminal getTerminalOrigen()  {
+		// TODO Auto-generated method stub
+			return this.tramos.get(0).getOrigen();
+			// si tenemos un circuito si o si tenemos una terminal.
+	}
 }
