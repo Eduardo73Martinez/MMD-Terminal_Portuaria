@@ -22,7 +22,7 @@ Diseño completo del proyecto [UML](https://drive.google.com/file/d/1Vc3NjyPhuk1
 
 ## Documentación
 
-Link a la documentación [Doc](https://github.com/Eduardo73Martinez/MMD-Terminal_Portuaria/blob/main/UML.pdf).
+Link a la documentación [Doc](https://github.com/Eduardo73Martinez/MMD-Terminal_Portuaria/blob/main/tf-mmd.pdf).
 
 ## Librerias 
 * [Mockito framework](https://site.mockito.org/): versión 5.7.0
