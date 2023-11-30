@@ -2,17 +2,12 @@ package model;
 
 public class Working implements BuqueState {
 
-	private Departing faseSiguiente;
+	private Departing siguiente;
 
 	public Working(Departing fase) {
-		this.faseSiguiente = fase;
+		this.siguiente = fase;
 	}
 	
-	@Override
-	public Departing siguiente() {
-		return this.faseSiguiente;
-	}
-
 	@Override
 	public boolean hayPosibilidadDeCambio(Buque buque) {
 		// TODO Auto-generated method stub
@@ -27,7 +22,7 @@ public class Working implements BuqueState {
 		// TODO Auto-generated method stub
 		if (this.hayPosibilidadDeCambio(buque)) {
 			this.avisarCambio(buque);
-			buque.setFase(this.siguiente());
+			buque.setFase(this.siguiente);
 		}
 	}
 }

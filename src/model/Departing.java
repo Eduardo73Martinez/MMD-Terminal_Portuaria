@@ -2,16 +2,11 @@ package model;
 
 public class Departing implements BuqueState {
 
-	private Outbound faseSiguiente;
+	private Outbound siguiente;
 	private float kmANuevaTerminal = 1; //Kms
 
 	public Departing(Outbound fase) {
-		this.faseSiguiente = fase;
-	}
-	
-	@Override
-	public Outbound siguiente() {
-		return this.faseSiguiente;
+		this.siguiente = fase;
 	}
 
 	@Override
@@ -35,7 +30,7 @@ public class Departing implements BuqueState {
 		// TODO Auto-generated method stub
 		if (this.hayPosibilidadDeCambio(buque)) {
 			this.avisarCambio(buque);
-			buque.setFase(this.siguiente());
+			buque.setFase(this.siguiente);
 		}
 	}
 }
